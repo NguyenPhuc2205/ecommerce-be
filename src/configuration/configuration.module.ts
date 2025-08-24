@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { JwtService } from '@nestjs/jwt'
-import { TokenService } from 'src/common/services/token.service'
+import { JwtModule, JwtService } from '@nestjs/jwt'
+import { TokenService } from 'src/shared/token/token.service'
 import { HashingService } from 'src/common/services/hashing.service'
 import { validateEnvironmentConfig } from 'src/configuration/env.config'
 
 @Module({
   imports: [
+    // ===========================
+    // ConfigModule
+    // ===========================
     ConfigModule.forRoot({
       // Make ConfigService available globally
       isGlobal: true,
@@ -18,14 +21,21 @@ import { validateEnvironmentConfig } from 'src/configuration/env.config'
       cache: true,
 
       // Allow variable expansion like ${VAR_NAME}
+      // Ex: postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}
       expandVariables: true,
 
       // Load .env files in order of preference
       envFilePath: ['.env.local', '.env'],
 
       // Don't ignore .env files if they don't exist in development
+      // In prod, env variables are set directly in server
       ignoreEnvFile: process.env.NODE_ENV === 'production',
     }),
+
+    // ===========================
+    // JwtModule
+    // ===========================
+    JwtModule,
   ],
   providers: [
     TokenService,
@@ -121,7 +131,6 @@ import { validateEnvironmentConfig } from 'src/configuration/env.config'
     },
   ],
   exports: [
-    ConfigService,
     TokenService,
     HashingService,
     'ACCESS_TOKEN_SERVICE',

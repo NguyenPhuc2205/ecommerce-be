@@ -11,7 +11,7 @@ export const createNonEmptyStringSchema = (minLength: number = 1): z.ZodString =
  * Creates a port number schema with range validation.
  */
 export const createPortSchema = (min: number = 1000, max: number = 65535): z.ZodCoercedNumber => {
-  return z.coerce.number().int().min(min).max(max)
+  return z.coerce.number().int().positive().min(min).max(max)
 }
 
 /**

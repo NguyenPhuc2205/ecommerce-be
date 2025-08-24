@@ -74,7 +74,7 @@ export const envConfigSchema = z.object({
   // ===========================
   // GOOGLE CONFIGURATION
   // ===========================
-  GOOGLE_CLIENT_ID: createNonEmptyStringSchema(),
+  GOOGLE_CLIENT_ID: z.string().optional(),
 
   // ===========================
   // SENDGRID CONFIGURATION

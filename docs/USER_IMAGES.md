@@ -56,18 +56,18 @@ No installation required. The utility is already included in your project.
 To generate both avatar and cover images for a user:
 
 ```typescript
-import { generateUserImages } from 'src/common/utils/user-images.util';
+import { generateUserImages } from 'src/common/utils/user-images.util'
 
 // In your user service or controller
-const userId = 123;
-const userName = 'John Doe';
+const userId = 123
+const userName = 'Nguyen Phuc'
 
 // Generate avatar and cover
-const userImages = await generateUserImages(userId, userName);
+const userImages = await generateUserImages(userId, userName)
 
 // Save to user profile
-user.avatar = userImages.avatar;
-user.cover = userImages.cover;
+user.avatar = userImages.avatar
+user.cover = userImages.cover
 ```
 
 ### Advanced Usage
@@ -75,37 +75,37 @@ user.cover = userImages.cover;
 Generate images with custom configuration:
 
 ```typescript
-import { generateUserImages } from 'src/common/utils/user-images.util';
+import { generateUserImages } from 'src/common/utils/user-images.util'
 
 const config = {
-  avatar: { 
+  avatar: {
     size: 512,
-    style: 'avataaars' // Specific DiceBear style
+    style: 'avataaars', // Specific DiceBear style
   },
-  cover: { 
-    width: 1200, 
-    height: 400 
+  cover: {
+    width: 1200,
+    height: 400,
   },
   validation: {
     timeout: 5000,
-    retries: 3
+    retries: 3,
   },
-  generateOptions: true // Generate options for user selection
-};
+  generateOptions: true, // Generate options for user selection
+}
 
-const userImages = await generateUserImages(userId, userName, config);
+const userImages = await generateUserImages(userId, userName, config)
 
 // Access primary images
-console.log(userImages.avatar);
-console.log(userImages.cover);
+console.log(userImages.avatar)
+console.log(userImages.cover)
 
 // Access fallbacks
-console.log(userImages.avatarFallbacks);
-console.log(userImages.coverFallbacks);
+console.log(userImages.avatarFallbacks)
+console.log(userImages.coverFallbacks)
 
 // Access options (if generateOptions was true)
-console.log(userImages.avatarOptions);
-console.log(userImages.coverOptions);
+console.log(userImages.avatarOptions)
+console.log(userImages.coverOptions)
 ```
 
 ### Available Functions
@@ -144,15 +144,15 @@ console.log(userImages.coverOptions);
 [DiceBear](https://dicebear.com/) is the primary avatar source, providing high-quality SVG avatars in multiple styles:
 
 ```typescript
-import { generateDiceBearAvatar } from 'src/common/utils/user-images.util';
+import { generateDiceBearAvatar } from 'src/common/utils/user-images.util'
 
 // Generate avatar
-const avatar = generateDiceBearAvatar(userId, userName, { 
+const avatar = generateDiceBearAvatar(userId, userName, {
   size: 512,
-  style: 'avataaars' // Optional style override
-});
+  style: 'avataaars', // Optional style override
+})
 
-console.log(avatar.url); // Use this URL
+console.log(avatar.url) // Use this URL
 ```
 
 Available styles: 'avataaars', 'big-ears', 'bottts', 'pixel-art', 'identicon', etc.
@@ -162,14 +162,14 @@ Available styles: 'avataaars', 'big-ears', 'bottts', 'pixel-art', 'identicon', e
 Text-based avatars showing user initials:
 
 ```typescript
-import { generateUIAvatar } from 'src/common/utils/user-images.util';
+import { generateUIAvatar } from 'src/common/utils/user-images.util'
 
 // Generate avatar with user's initials
-const avatar = generateUIAvatar('John Doe', { 
-  size: 512, 
+const avatar = generateUIAvatar('Nguyen Phuc', {
+  size: 512,
   rounded: true,
-  bold: true
-});
+  bold: true,
+})
 ```
 
 ### Robohash Avatars
@@ -177,9 +177,9 @@ const avatar = generateUIAvatar('John Doe', {
 Robot-themed avatars:
 
 ```typescript
-import { generateRobohashAvatar } from 'src/common/utils/user-images.util';
+import { generateRobohashAvatar } from 'src/common/utils/user-images.util'
 
-const avatar = generateRobohashAvatar(userId, userName, { size: 512 });
+const avatar = generateRobohashAvatar(userId, userName, { size: 512 })
 ```
 
 ## Cover Generators
@@ -189,9 +189,9 @@ const avatar = generateRobohashAvatar(userId, userName, { size: 512 });
 Nature photos from [Lorem Picsum](https://picsum.photos/):
 
 ```typescript
-import { generatePicsumCover } from 'src/common/utils/user-images.util';
+import { generatePicsumCover } from 'src/common/utils/user-images.util'
 
-const cover = generatePicsumCover(userId, { width: 1200, height: 400 });
+const cover = generatePicsumCover(userId, { width: 1200, height: 400 })
 ```
 
 ### Gradient Covers
@@ -199,9 +199,9 @@ const cover = generatePicsumCover(userId, { width: 1200, height: 400 });
 Beautiful SVG gradients that work offline:
 
 ```typescript
-import { generateGradientCover } from 'src/common/utils/user-images.util';
+import { generateGradientCover } from 'src/common/utils/user-images.util'
 
-const cover = generateGradientCover(userId, { width: 1200, height: 400 });
+const cover = generateGradientCover(userId, { width: 1200, height: 400 })
 ```
 
 ### Unsplash Covers
@@ -209,9 +209,9 @@ const cover = generateGradientCover(userId, { width: 1200, height: 400 });
 Themed photos from [Unsplash](https://unsplash.com/):
 
 ```typescript
-import { generateUnsplashCover } from 'src/common/utils/user-images.util';
+import { generateUnsplashCover } from 'src/common/utils/user-images.util'
 
-const cover = generateUnsplashCover(userId, { width: 1200, height: 400 });
+const cover = generateUnsplashCover(userId, { width: 1200, height: 400 })
 ```
 
 ## Validation
@@ -219,13 +219,13 @@ const cover = generateUnsplashCover(userId, { width: 1200, height: 400 });
 The utility includes validation to ensure generated image URLs are accessible:
 
 ```typescript
-import { validateImageUrl } from 'src/common/utils/user-images.util';
+import { validateImageUrl } from 'src/common/utils/user-images.util'
 
 const isValid = await validateImageUrl(imageUrl, {
   timeout: 5000,
   retries: 2,
-  validateContentType: true
-});
+  validateContentType: true,
+})
 ```
 
 ## Frontend Utilities
@@ -235,11 +235,11 @@ const isValid = await validateImageUrl(imageUrl, {
 Create responsive versions of images:
 
 ```typescript
-import { getResponsiveImageUrl } from 'src/common/utils/user-images.util';
+import { getResponsiveImageUrl } from 'src/common/utils/user-images.util'
 
 // Original URL -> Small version for mobile
-const smallAvatar = getResponsiveImageUrl(user.avatar, IMAGE_SOURCES.DICEBEAR, 'sm');
-const mediumCover = getResponsiveImageUrl(user.cover, IMAGE_SOURCES.PICSUM, 'md');
+const smallAvatar = getResponsiveImageUrl(user.avatar, IMAGE_SOURCES.DICEBEAR, 'sm')
+const mediumCover = getResponsiveImageUrl(user.cover, IMAGE_SOURCES.PICSUM, 'md')
 ```
 
 ### Image Fallbacks
@@ -273,15 +273,15 @@ return <img {...imgProps} alt="User avatar" />;
 ### Complete User Registration Flow
 
 ```typescript
-import { generateUserImages } from 'src/common/utils/user-images.util';
+import { generateUserImages } from 'src/common/utils/user-images.util'
 
 async function registerUser(userData) {
   // Generate images
   const userImages = await generateUserImages(
     userData.email, // Use email as identifier before user has an ID
     userData.name,
-    { generateOptions: false }
-  );
+    { generateOptions: false },
+  )
 
   // Create user with generated images
   const newUser = await prisma.user.create({
@@ -294,27 +294,27 @@ async function registerUser(userData) {
       avatarFallbacks: JSON.stringify(userImages.avatarFallbacks),
       coverFallbacks: JSON.stringify(userImages.coverFallbacks),
     },
-  });
+  })
 
-  return newUser;
+  return newUser
 }
 ```
 
 ### User Profile Customization
 
 ```typescript
-import { generateAvatarOptions, generateCoverOptions } from 'src/common/utils/user-images.util';
+import { generateAvatarOptions, generateCoverOptions } from 'src/common/utils/user-images.util'
 
 async function getProfileCustomizationOptions(userId, userName) {
   // Generate options in parallel
   const [avatarOptions, coverOptions] = await Promise.all([
     generateAvatarOptions(userId, userName, { size: 512 }, 12),
-    generateCoverOptions(userId, { width: 1200, height: 400 }, 9)
-  ]);
+    generateCoverOptions(userId, { width: 1200, height: 400 }, 9),
+  ])
 
   return {
     avatarOptions,
-    coverOptions
-  };
+    coverOptions,
+  }
 }
 ```

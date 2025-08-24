@@ -1,0 +1,3 @@
+#!/bin/sh
+# Husky v9 pre-commit hook
+pnpm exec lint-staged

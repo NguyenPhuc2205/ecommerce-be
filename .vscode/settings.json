@@ -1,0 +1,46 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "git.inputValidationLength": 120,
+  "git.inputValidationSubjectLength": 50,
+  "conventionalCommits.scopes": [
+    "auth",
+    "user",
+    "admin",
+    "product",
+    "category",
+    "cart",
+    "order",
+    "payment",
+    "shipping",
+    "inventory",
+    "review",
+    "wishlist",
+    "coupon",
+    "notification",
+    "email",
+    "analytics",
+    "api",
+    "database",
+    "config",
+    "middleware",
+    "guard",
+    "dto",
+    "entity",
+    "service",
+    "controller",
+    "module"
+  ],
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

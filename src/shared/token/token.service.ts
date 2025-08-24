@@ -1,3 +1,4 @@
+// TOkenManagerService (High-level) -> AccessToken/RefreshTokenService -> TokenFactory -> Strategy
 import { Injectable } from '@nestjs/common'
 import { JwtService, JwtSignOptions } from '@nestjs/jwt'
 import { IJwtPayload } from 'src/common/interfaces'

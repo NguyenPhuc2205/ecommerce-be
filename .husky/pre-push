@@ -1,0 +1,3 @@
+#!/bin/sh
+# Husky v9 pre-push hook
+pnpm run test
