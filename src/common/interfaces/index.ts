@@ -12,3 +12,5 @@ export type {
   IAvatarOption,
   ICoverOption,
 } from './user-image.interface'
+
+export type { ITokenPair } from './token.interface'

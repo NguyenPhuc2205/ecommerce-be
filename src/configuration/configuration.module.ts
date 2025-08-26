@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { JwtModule, JwtService } from '@nestjs/jwt'
-import { TokenService } from 'src/shared/token/token.service'
+import { JwtModule } from '@nestjs/jwt'
 import { HashingService } from 'src/common/services/hashing.service'
 import { validateEnvironmentConfig } from 'src/configuration/env.config'
 
@@ -38,36 +37,7 @@ import { validateEnvironmentConfig } from 'src/configuration/env.config'
     JwtModule,
   ],
   providers: [
-    TokenService,
     HashingService,
-
-    // Access Token JWT Service
-    {
-      provide: 'ACCESS_TOKEN_SERVICE',
-      useFactory: (configService: ConfigService) => {
-        return new JwtService({
-          secret: configService.get<string>('JWT_ACCESS_TOKEN_SECRET'),
-          signOptions: {
-            expiresIn: configService.get<string>('JWT_ACCESS_TOKEN_EXPIRATION_TIME'),
-          },
-        })
-      },
-      inject: [ConfigService],
-    },
-
-    // Refresh Token JWT Service
-    {
-      provide: 'REFRESH_TOKEN_SERVICE',
-      useFactory: (configService: ConfigService) => {
-        return new JwtService({
-          secret: configService.get<string>('JWT_REFRESH_TOKEN_SECRET'),
-          signOptions: {
-            expiresIn: configService.get<string>('JWT_REFRESH_TOKEN_EXPIRATION_TIME'),
-          },
-        })
-      },
-      inject: [ConfigService],
-    },
 
     // Redis Configuration
     {
@@ -130,15 +100,6 @@ import { validateEnvironmentConfig } from 'src/configuration/env.config'
       inject: [ConfigService],
     },
   ],
-  exports: [
-    TokenService,
-    HashingService,
-    'ACCESS_TOKEN_SERVICE',
-    'REFRESH_TOKEN_SERVICE',
-    'REDIS_CONFIG',
-    'CLOUDINARY_CONFIG',
-    'DATABASE_CONFIG',
-    'SENDGRID_CONFIG',
-  ],
+  exports: [HashingService, 'REDIS_CONFIG', 'CLOUDINARY_CONFIG', 'DATABASE_CONFIG', 'SENDGRID_CONFIG'],
 })
 export class ConfigurationModule {}

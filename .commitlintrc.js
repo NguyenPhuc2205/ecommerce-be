@@ -40,6 +40,7 @@ module.exports = {
         'notification', // Push notifications
         'email', // Email services
         'analytics', // Analytics & reporting
+        'shared', // Shared Nest modules
 
         // Technical Layers
         'api', // API layer

@@ -1,7 +1,11 @@
-import { Module } from '@nestjs/common'
+import { Global, Module } from '@nestjs/common'
 import { TokenModule } from './token/token.module'
 
+const sharedModules = [TokenModule]
+
+@Global()
 @Module({
-  imports: [TokenModule],
+  imports: sharedModules,
+  exports: sharedModules,
 })
 export class SharedModule {}
