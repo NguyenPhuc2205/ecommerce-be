@@ -32,7 +32,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-        working-directory: ./backend
 
       - name: Lint check
         run: pnpm run lint:check
