@@ -18,12 +18,11 @@ jobs:
         run: |
           pwd
           ls -la
-          ls -R | head -50
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 10.14.0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -33,6 +32,7 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+        working-directory: ./backend
 
       - name: Lint check
         run: pnpm run lint:check
@@ -62,7 +62,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 10.14.0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
