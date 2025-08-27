@@ -17,6 +17,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Debug repo files
+        run: |
+          pwd
+          ls -la
+          ls -la backend || true
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
