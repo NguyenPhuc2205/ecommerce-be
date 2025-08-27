@@ -1,16 +1,16 @@
-import { Injectable, Inject } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { JWT_SERVICES, TokenType, TOKEN_TYPES } from 'src/common/constants'
+import { JWT_SERVICES, TOKEN_TYPES, TokenType } from 'src/common/constants'
 import { IJwtPayload, ITokenPair } from 'src/common/interfaces'
 
 @Injectable()
 export class TokenService {
   constructor(
     @Inject(JWT_SERVICES.ACCESS_TOKEN)
-    private readonly accessTokenJwt: JwtService,
+    private readonly accessTokenJwtService: JwtService,
 
     @Inject(JWT_SERVICES.REFRESH_TOKEN)
-    private readonly refreshTokenJwt: JwtService,
+    private readonly refreshTokenJwtService: JwtService,
   ) {}
 
   /**
@@ -21,9 +21,9 @@ export class TokenService {
   private getJwtService(type: TokenType): JwtService {
     switch (type) {
       case TOKEN_TYPES.ACCESS:
-        return this.accessTokenJwt
+        return this.accessTokenJwtService
       case TOKEN_TYPES.REFRESH:
-        return this.refreshTokenJwt
+        return this.refreshTokenJwtService
       default:
         throw new Error(`Unsupported token type: ${type as string}`)
     }
@@ -61,7 +61,7 @@ export class TokenService {
     try {
       // Use any service for decoding (they all decode the same way)
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const decoded = this.accessTokenJwt.decode(token)
+      const decoded = this.getJwtService(TOKEN_TYPES.ACCESS).decode(token)
       return decoded ? (decoded as IJwtPayload) : null
     } catch {
       return null
@@ -76,7 +76,7 @@ export class TokenService {
   async generateTokenPair(payload: IJwtPayload): Promise<ITokenPair> {
     const [accessToken, refreshToken] = await Promise.all([
       this.sign(TOKEN_TYPES.ACCESS, payload),
-      this.sign(TOKEN_TYPES.REFRESH, { sub: payload.sub }), // Minimal refresh payload
+      this.sign(TOKEN_TYPES.REFRESH, { sub: payload.sub }),
     ])
 
     return { accessToken, refreshToken }
