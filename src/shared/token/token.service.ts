@@ -1,15 +1,17 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { JWT_SERVICES, TOKEN_TYPES, TokenType } from 'src/common/constants'
+import { Request } from 'express'
+import { TOKEN_TYPES, TokenType } from 'src/common/constants'
 import { IJwtPayload, ITokenPair } from 'src/common/interfaces'
+import { CONFIGURATION_PROVIDER_TOKENS } from 'src/configuration/configuration.constant'
 
 @Injectable()
 export class TokenService {
   constructor(
-    @Inject(JWT_SERVICES.ACCESS_TOKEN)
+    @Inject(CONFIGURATION_PROVIDER_TOKENS.JWT_ACCESS_TOKEN_SERVICE)
     private readonly accessTokenJwtService: JwtService,
 
-    @Inject(JWT_SERVICES.REFRESH_TOKEN)
+    @Inject(CONFIGURATION_PROVIDER_TOKENS.JWT_REFRESH_TOKEN_SERVICE)
     private readonly refreshTokenJwtService: JwtService,
   ) {}
 
@@ -50,6 +52,23 @@ export class TokenService {
   async verify<T = IJwtPayload>(type: TokenType, token: string): Promise<T> {
     const jwtService = this.getJwtService(type)
     return jwtService.verifyAsync(token) as Promise<T>
+  }
+
+  /**
+   * Extract the JWT token from the request headers.
+   * @param req The incoming request object
+   * @returns The extracted JWT token or null if not found
+   */
+  extractTokenFromHeader(req: Request): string | null {
+    const authHeader = req.headers.authorization
+
+    if (!authHeader || typeof authHeader !== 'string') return null
+
+    const [scheme, token] = authHeader.split(' ')
+
+    if (scheme !== 'Bearer' || !token || token.trim() === '') return null
+
+    return token.trim()
   }
 
   /**
