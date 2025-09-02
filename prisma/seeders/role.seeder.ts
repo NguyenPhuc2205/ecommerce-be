@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common'
-import { PrismaService } from 'src/common/services/prisma.service'
-import { ROLE_NAMES } from 'src/common/constants/role.constants'
+import { PrismaClient } from '@prisma/client'
+import { ROLE_NAMES } from 'src/common/constants'
 
-@Injectable()
 export class RoleSeeder {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaClient) {}
 
   async seed(): Promise<void> {
     const roleCount = await this.prisma.role.count()

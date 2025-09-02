@@ -1,19 +1,14 @@
-import { NestFactory } from '@nestjs/core'
+import { PrismaClient } from '@prisma/client'
 import { RoleSeeder } from './role.seeder'
 import { PermissionSeeder } from './permission.seeder'
 import { UserSeeder } from './user.seeder'
-import { AppModule } from 'src/app.module'
-import { PrismaService } from 'src/common/services/prisma.service'
 
 async function runSeeders() {
   try {
     console.log('Starting database seeding...')
 
-    // Create app context
-    const app = await NestFactory.createApplicationContext(AppModule)
-
-    // PrismaService instance
-    const prisma = app.get(PrismaService)
+    // Create direct Prisma instance
+    const prisma = new PrismaClient()
     await prisma.$connect()
 
     // Create Seeder instances
@@ -34,18 +29,21 @@ async function runSeeders() {
     // Complete & Close Prisma connection
     console.log('\nDatabase seeding completed successfully!')
     await prisma.$disconnect()
-    await app.close()
   } catch (error) {
     console.error('Error during seeding:', error)
     process.exit(1)
   }
 }
 
-if (require.main === module) {
-  runSeeders().catch((error) => {
-    console.error('Failed to seed database:', error)
-    process.exit(1)
-  })
+async function main() {
+  await runSeeders()
 }
 
-export { runSeeders }
+main()
+  .catch((e) => {
+    console.error('Error in seed script:', e)
+    process.exit(1)
+  })
+  .finally(() => {
+    console.log('Seed script complete.')
+  })

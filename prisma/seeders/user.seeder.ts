@@ -1,12 +1,9 @@
-import { Injectable } from '@nestjs/common'
-import { PrismaService } from 'src/common/services/prisma.service'
-import { ROLE_NAMES } from 'src/common/constants/role.constants'
-import { UserStatus } from '@prisma/client'
+import { PrismaClient, UserStatus } from '@prisma/client'
 import * as bcrypt from 'bcrypt'
+import { ROLE_NAMES } from 'src/common/constants'
 
-@Injectable()
 export class UserSeeder {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaClient) {}
 
   async seed(): Promise<void> {
     const adminEmail = process.env.ADMIN_EMAIL || 'nguyenhuuphuc22052004@gmail.com'
