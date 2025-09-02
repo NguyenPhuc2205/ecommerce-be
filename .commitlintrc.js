@@ -80,6 +80,11 @@ module.exports = {
         'testing', // Test configuration
         'ci', // CI/CD pipelines
         'release', // Release management
+
+        // Other
+        'seeder',
+        'migration',
+        'common',
       ],
     ],
 

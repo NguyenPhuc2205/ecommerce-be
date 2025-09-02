@@ -4,11 +4,14 @@ import { AppService } from './app.service'
 import { SharedModule } from './shared/shared.module'
 import { ConfigurationModule } from './configuration/configuration.module'
 import { AuthModule } from './modules/auth/auth.module'
-import { APP_PIPE } from '@nestjs/core'
-import { ZodValidationPipe } from 'nestjs-zod'
+import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
+import { CustomZodValidationPipe } from 'src/common/pipes'
+import { ZodSerializerInterceptor } from 'nestjs-zod'
+import { RolesModule } from './modules/roles/roles.module'
+import { LanguagesModule } from './modules/languages/languages.module'
 
 @Module({
-  imports: [SharedModule, ConfigurationModule, AuthModule],
+  imports: [SharedModule, ConfigurationModule, AuthModule, RolesModule, LanguagesModule],
   controllers: [AppController],
   providers: [
     AppService,
@@ -16,7 +19,13 @@ import { ZodValidationPipe } from 'nestjs-zod'
     // Global Zod validation pipe (nestjs-zod library)
     {
       provide: APP_PIPE,
-      useClass: ZodValidationPipe,
+      useClass: CustomZodValidationPipe,
+    },
+
+    // Global Zod Serializer Interceptor
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ZodSerializerInterceptor,
     },
   ],
 })
