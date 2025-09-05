@@ -4,17 +4,24 @@ import { AppService } from './app.service'
 import { SharedModule } from './shared/shared.module'
 import { ConfigurationModule } from './configuration/configuration.module'
 import { AuthModule } from './modules/auth/auth.module'
-import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
+import { APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
 import { CustomZodValidationPipe } from 'src/common/pipes'
 import { ZodSerializerInterceptor } from 'nestjs-zod'
 import { RolesModule } from './modules/roles/roles.module'
 import { LanguagesModule } from './modules/languages/languages.module'
+import { AuthenticationGuard } from 'src/common/guards'
 
 @Module({
   imports: [SharedModule, ConfigurationModule, AuthModule, RolesModule, LanguagesModule],
   controllers: [AppController],
   providers: [
     AppService,
+
+    // Global Guard (Auth for x-api-key, jwt, etc.)
+    {
+      provide: APP_GUARD,
+      useClass: AuthenticationGuard,
+    },
 
     // Global Zod validation pipe (nestjs-zod library)
     {

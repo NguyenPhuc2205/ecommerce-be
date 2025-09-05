@@ -1,8 +1,14 @@
 import { SetMetadata } from '@nestjs/common'
-import { AuthStrategy, GuardCondition } from 'src/common/constants'
+import { AuthMetadata, AuthStrategy, GUARD_CONDITIONS, GuardCondition } from 'src/common/constants'
 
 export const AUTH_STRATEGIES_KEY = 'authStrategies'
 
-export const Auth = (authStrategies: AuthStrategy[], options: { condition: GuardCondition }) => {
-  return SetMetadata(AUTH_STRATEGIES_KEY, { authStrategies, options })
+export const Auth = (authStrategies: AuthStrategy[], options?: { condition?: GuardCondition }) => {
+  const authMetadata: AuthMetadata = {
+    authStrategies,
+    options: {
+      condition: options?.condition ?? GUARD_CONDITIONS.AND,
+    },
+  }
+  return SetMetadata(AUTH_STRATEGIES_KEY, authMetadata)
 }

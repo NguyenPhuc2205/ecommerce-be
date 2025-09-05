@@ -5,5 +5,5 @@ export interface IJwtPayload {
   iss?: string // Issuer
   aud?: string // Audience
   type?: string // Token type for identification
-  [key: string]: any // Flexible for any additional claims
+  [key: string]: unknown // Flexible for any additional claims
 }
