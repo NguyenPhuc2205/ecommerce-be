@@ -166,7 +166,7 @@ Closes #234
 - **What it does:** Provides step-by-step wizard for creating commit messages
 - **Why needed:** Helps beginners and prevents format mistakes
 
-### Installation Commands:
+### Installation Commands
 
 ```bash
 # Essential tools
