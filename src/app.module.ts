@@ -4,12 +4,13 @@ import { AppService } from './app.service'
 import { SharedModule } from './shared/shared.module'
 import { ConfigurationModule } from './configuration/configuration.module'
 import { AuthModule } from './modules/auth/auth.module'
-import { APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
 import { CustomZodValidationPipe } from 'src/common/pipes'
 import { ZodSerializerInterceptor } from 'nestjs-zod'
 import { RolesModule } from './modules/roles/roles.module'
 import { LanguagesModule } from './modules/languages/languages.module'
 import { AuthenticationGuard } from 'src/common/guards'
+import { CatchEverythingFilter } from 'src/common/filters/catch-everything.filter'
 
 @Module({
   imports: [SharedModule, ConfigurationModule, AuthModule, RolesModule, LanguagesModule],
@@ -33,6 +34,12 @@ import { AuthenticationGuard } from 'src/common/guards'
     {
       provide: APP_INTERCEPTOR,
       useClass: ZodSerializerInterceptor,
+    },
+
+    // Global Filters to catch exceptions
+    {
+      provide: APP_FILTER,
+      useClass: CatchEverythingFilter,
     },
   ],
 })
