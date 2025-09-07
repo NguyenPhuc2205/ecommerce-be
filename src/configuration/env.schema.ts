@@ -5,7 +5,7 @@ import {
   createPortSchema,
   createEmailSchema,
   createDatabaseUrlSchema,
-  createJwtExpirationSchema,
+  createExpirationSchema,
   createPositiveIntSchema,
   createRangeSchema,
   createStringArraySchema,
@@ -58,11 +58,11 @@ export const envConfigSchema = z.object({
   // ===========================
   JWT_ACCESS_TOKEN_SECRET: createNonEmptyStringSchema(),
 
-  JWT_ACCESS_TOKEN_EXPIRATION_TIME: createJwtExpirationSchema().default('1h'),
+  JWT_ACCESS_TOKEN_EXPIRATION_TIME: createExpirationSchema().default('1h'),
 
   JWT_REFRESH_TOKEN_SECRET: createNonEmptyStringSchema(),
 
-  JWT_REFRESH_TOKEN_EXPIRATION_TIME: createJwtExpirationSchema().default('7d'),
+  JWT_REFRESH_TOKEN_EXPIRATION_TIME: createExpirationSchema().default('7d'),
 
   // ===========================
   // LOGGING CONFIGURATION
@@ -144,6 +144,11 @@ export const envConfigSchema = z.object({
   ADMIN_EMAIL: createEmailSchema(5).default('admin@example.com'),
 
   ADMIN_PASSWORD: createNonEmptyStringSchema(8).default('admin1234'),
+
+  // ===========================
+  // OTP CONFIGURATION
+  // ===========================
+  OTP_EXPIRATION: createExpirationSchema().default('10m'),
 })
 
 export type EnvConfig = z.infer<typeof envConfigSchema>
