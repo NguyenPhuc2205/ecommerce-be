@@ -1,29 +1,38 @@
 import { Injectable } from '@nestjs/common'
-import { HashingService, PrismaService, TokenService } from 'src/common/services'
-import { RegisterUserDto } from 'src/modules/auth/auth.dto'
+import { AuthRepository } from 'src/modules/auth/auth.repository'
+import { CreateClient, Register } from 'src/modules/auth/schemas'
+import { HashingService } from 'src/shared/security/hashing.service'
+import { TokenService } from 'src/shared/token/token.service'
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly prismaService: PrismaService,
-
+    private readonly authRepository: AuthRepository,
     private readonly hashingService: HashingService,
-
     private readonly tokenService: TokenService,
   ) {}
 
-  async register(body: RegisterUserDto) {
-    const hashedPassword = this.hashingService.hash(body.password)
-    const user = await this.prismaService.user.create({
-      data: {
-        email: body.email,
-        name: body.name,
-        phoneNumber: body.phoneNumber,
-        password: hashedPassword,
-        roleId: 1,
-      },
-    })
+  async register(body: Register) {
+    // TODO: validate if email or phone number (unique) already exists
 
-    return user
+    const hashedPassword = this.hashingService.hash(body.password)
+    const clientRoleId = 2 // TODO: get client role id from database
+
+    const clientData: CreateClient = {
+      email: body.email,
+      name: body.name,
+      phoneNumber: body.phoneNumber,
+      password: hashedPassword,
+      roleId: clientRoleId,
+    } as const
+
+    const newClient = await this.authRepository.createUser(clientData)
+
+    console.log('[AuthService] New client created: ', newClient)
+
+    return newClient
   }
+
+  // async validateUser(body: Register) {
+  // }
 }
