@@ -25,6 +25,7 @@ module.exports = {
       [
         // Business Modules
         'auth', // Authentication & Authorization
+        'configuration', // App configuration module
         'user', // User management
         'admin', // Admin panel
         'product', // Product catalog
