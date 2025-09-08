@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { AuthRepository } from 'src/modules/auth/auth.repository'
 import { CreateClient, Register } from 'src/modules/auth/schemas'
+import { UsersService } from 'src/modules/users/users.service'
 import { HashingService } from 'src/shared/security/hashing.service'
 import { TokenService } from 'src/shared/token/token.service'
 
@@ -10,6 +11,7 @@ export class AuthService {
     private readonly authRepository: AuthRepository,
     private readonly hashingService: HashingService,
     private readonly tokenService: TokenService,
+    private readonly usersService: UsersService,
   ) {}
 
   async register(body: Register) {
@@ -32,7 +34,4 @@ export class AuthService {
 
     return newClient
   }
-
-  // async validateUser(body: Register) {
-  // }
 }
