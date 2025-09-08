@@ -11,9 +11,19 @@ import { RolesModule } from './modules/roles/roles.module'
 import { LanguagesModule } from './modules/languages/languages.module'
 import { AuthenticationGuard } from 'src/common/guards'
 import { CatchEverythingFilter } from 'src/common/filters/catch-everything.filter'
+import { UsersModule } from './modules/users/users.module'
+import { VerificationCodesModule } from './modules/verification-codes/verification-codes.module'
 
 @Module({
-  imports: [SharedModule, ConfigurationModule, AuthModule, RolesModule, LanguagesModule],
+  imports: [
+    SharedModule,
+    ConfigurationModule,
+    AuthModule,
+    RolesModule,
+    LanguagesModule,
+    UsersModule,
+    VerificationCodesModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,

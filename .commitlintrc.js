@@ -25,6 +25,7 @@ module.exports = {
       [
         // Business Modules
         'auth', // Authentication & Authorization
+        'verification-code', // Verification codes (OTP, 2FA)
         'configuration', // App configuration module
         'user', // User management
         'admin', // Admin panel
