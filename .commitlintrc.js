@@ -43,6 +43,8 @@ module.exports = {
         'email', // Email services
         'analytics', // Analytics & reporting
         'shared', // Shared Nest modules
+        'role', // Role management
+        'permission', // Permission management
 
         // Technical Layers
         'api', // API layer
