@@ -62,6 +62,9 @@ model User {
   devices       Device[]
   refreshTokens RefreshToken[]
 
+  // Verification Codes
+  verificationCodes VerificationCode[]
+
   // E-commerce relations
   carts   CartItem[]
   orders  Order[]
@@ -172,17 +175,33 @@ model UserTranslation {
 }
 
 model VerificationCode {
-  id    Int                  @id @default(autoincrement())
-  email String               @db.VarChar(500)
-  code  String               @db.VarChar(50)
-  type  VerificationCodeType
+  id          Int                  @id @default(autoincrement())
+  identifier  String               @db.VarChar(500)  // email or phone
+  code        String               @db.VarChar(255)
+  type        VerificationCodeType
+  attempts    Int                  @default(0)  // Number of attempts made (wrong times - tried)
+  maxAttempts Int                  @default(5)  // Max times allowed to try
+  isUsed      Boolean              @default(false)  // Mark if the code has been used or is disabled
+  resendCount Int                  @default(0)
+  
+  deliveryMethod OTPDeliveryMethod @default(EMAIL)  // How the code was sent
 
-  expiresAt DateTime
-  createdAt DateTime @default(now())
+  userId      Int?
+  user        User?                @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([email, type])
-  @@index([expiresAt])
-  @@index([email, code, type])
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  usedAt      DateTime?
+
+  @@index([identifier, type, isUsed]) // For checking if there's an active code for the identifier and type
+  @@index([expiresAt])  // For cleaning up expired codes
+  @@index([identifier, code, type]) // For finding and validating codes
+  @@index([userId]) // For finding codes related to a user
+  @@index([createdAt])  // For analytics
+  @@index([type, deliveryMethod]) // For analytics
+
+  // @@map("verification_codes")
 }
 
 model Device {
@@ -734,6 +753,13 @@ enum VerificationCodeType {
   REGISTER
   FORGOT_PASSWORD
   DISABLE_2FA
+}
+
+enum OTPDeliveryMethod {
+  EMAIL
+  SMS
+  VOICE
+  WHATSAPP
 }
 
 enum UserStatus {
