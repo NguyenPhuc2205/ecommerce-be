@@ -11,9 +11,11 @@ export class ResendEmailService {
   }
 
   sendVerificationCodeEmail(payload: { email: string; code: string }) {
+    // TODO: Use a proper email template, load from, cc emails from .env
+    // TODO: Handle errors and logging (pending, error,...)
     return this.resend.emails.send({
-      from: 'Acme <onboarding@resend.dev>',
-      to: ['nguyenhuuphuc22052004@gmail.com'],
+      from: 'Ecommerce <no-reply@nguyenhuuphuc.id.vn>',
+      to: [payload.email],
       subject: 'Your verification code',
       html: `<strong>Your verification code is ${payload.code}</strong>`,
     })

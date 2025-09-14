@@ -2,9 +2,12 @@ import { BaseVerificationCodeSchema } from 'src/modules/verification-codes/schem
 import z from 'zod'
 
 export const CreateVerificationCodeSchema = BaseVerificationCodeSchema.pick({
-  email: true,
+  identifier: true,
   code: true,
   type: true,
+  deliveryMethod: true,
+  maxAttempts: true,
+  userId: true,
   expiresAt: true,
 }).strict()
 

@@ -55,6 +55,10 @@ model User {
   status      UserStatus @default(INACTIVE)
   roleId      Int
 
+  deletedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   // Relations
   role Role @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
@@ -136,10 +140,6 @@ model User {
   deletedOrders               Order[]               @relation("OrderDeletedBy")
   soldOrders                  Order[]               @relation("Shop")
 
-  deletedAt DateTime?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
   @@index([email])
   @@index([status])
   @@index([roleId])
@@ -190,8 +190,8 @@ model VerificationCode {
   user        User?                @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   expiresAt   DateTime
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
   usedAt      DateTime?
 
   @@index([identifier, type, isUsed]) // For checking if there's an active code for the identifier and type
