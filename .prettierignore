@@ -1,0 +1,33 @@
+# Dependencies
+node_modules
+
+# Build directories
+build
+dist
+coverage
+.out
+
+# Generated files
+*.tsbuildinfo
+
+# Lock files & logs
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+*.log
+
+# System & IDE files
+.DS_Store
+.env
+.env.*.local
+.vscode
+.idea
+
+# Temp files
+*.local
+*.swp
+*.swo
+*.bak
+
+# Keep compiled JS in dist directory
+dist/**/*.js
