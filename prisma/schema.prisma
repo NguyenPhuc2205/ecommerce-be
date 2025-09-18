@@ -4,6 +4,9 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+// Scalar Types: https://pris.ly/d/prisma-schema#scalar-types (Effect on migrations)
+// Relation/Non-Scalar Fields: https://pris.ly/d/prisma-schema#relation-fields
+
 generator client {
   provider = "prisma-client-js"
 }
