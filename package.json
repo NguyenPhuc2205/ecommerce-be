@@ -75,6 +75,8 @@
     "@types/express": "^5.0.0",
     "@types/jest": "^30.0.0",
     "@types/node": "^22.10.7",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
     "@types/supertest": "^6.0.2",
     "commitizen": "^4.3.1",
     "eslint": "^9.18.0",

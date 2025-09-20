@@ -9,11 +9,11 @@ export interface IEmailTheme {
 
     // Background hierarchy
     background: {
-      default: string
-      card: string
-      elevated: string
-      subtle: string
-      muted: string
+      default: string // Main background color
+      card: string // Card or container background
+      elevated: string // Elevated background (e.g., for modals)
+      subtle: string // Subtle background (light variant, section separators, less emphasis)
+      muted: string // Muted background (dimmed/disabled areas, lowest emphasis)
     }
 
     // Text colors
@@ -83,6 +83,7 @@ export interface IEmailTheme {
       heading: string
       mono: string
     }
+
     fontSize: {
       xs: string
       sm: string
@@ -92,12 +93,14 @@ export interface IEmailTheme {
       xxl: string
       xxxl: string
     }
+
     fontWeight: {
       normal: string
       medium: string
       semibold: string
       bold: string
     }
+
     lineHeight: {
       tight: string
       normal: string
