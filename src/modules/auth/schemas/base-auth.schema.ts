@@ -33,6 +33,13 @@ export const BaseAuthSchema = z.object({
   deletedAt: z.date().optional().nullable(),
   createdAt: z.date().default(() => new Date()),
   updatedAt: z.date().default(() => new Date()),
+
+  // Tokens
+  accessToken: z.string().nonempty(),
+  refreshToken: z.string().nonempty(),
+
+  // Login options
+  rememberMe: z.boolean().optional().default(false),
 })
 
 export type BaseAuth = z.infer<typeof BaseAuthSchema>

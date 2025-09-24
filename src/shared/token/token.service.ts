@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common'
-import { JwtService } from '@nestjs/jwt'
+import { JwtService, JwtSignOptions } from '@nestjs/jwt'
 import { Request } from 'express'
 import { TOKEN_TYPES, TokenType } from 'src/common/constants'
 import { IJwtPayload, ITokenPair } from 'src/common/interfaces'
@@ -37,10 +37,10 @@ export class TokenService {
    * @param payload The payload to include in the token
    * @returns The signed JWT token
    */
-  async sign(type: TokenType, payload: IJwtPayload): Promise<string> {
-    const jwtService = this.getJwtService(type)
+  async sign(type: TokenType, payload: IJwtPayload, options?: JwtSignOptions): Promise<string> {
+    const jwtService: JwtService = this.getJwtService(type)
     const tokenPayload = { ...payload, type }
-    return jwtService.signAsync(tokenPayload)
+    return jwtService.signAsync(tokenPayload, options)
   }
 
   /**
@@ -49,18 +49,18 @@ export class TokenService {
    * @param token The JWT token to verify
    * @returns The decoded payload if the token is valid
    */
-  async verify<T = IJwtPayload>(type: TokenType, token: string): Promise<T> {
+  async verify<T extends object = IJwtPayload>(type: TokenType, token: string): Promise<T> {
     const jwtService = this.getJwtService(type)
-    return jwtService.verifyAsync(token) as Promise<T>
+    return jwtService.verifyAsync<T>(token)
   }
 
   /**
    * Extract the JWT token from the request headers.
-   * @param req The incoming request object
+   * @param req The incoming request object (express.Request)
    * @returns The extracted JWT token or null if not found
    */
-  extractTokenFromHeader(req: Request): string | null {
-    const authHeader = req.headers.authorization
+  extractTokenFromHeader(request: Request): string | null {
+    const authHeader = request.headers.authorization
 
     if (!authHeader || typeof authHeader !== 'string') return null
 
@@ -78,10 +78,8 @@ export class TokenService {
    */
   decode(token: string): IJwtPayload | null {
     try {
-      // Use any service for decoding (they all decode the same way)
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const decoded = this.getJwtService(TOKEN_TYPES.ACCESS).decode(token)
-      return decoded ? (decoded as IJwtPayload) : null
+      const decoded = this.getJwtService(TOKEN_TYPES.ACCESS).decode<IJwtPayload | null>(token)
+      return decoded ? decoded : null
     } catch {
       return null
     }
