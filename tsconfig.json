@@ -21,7 +21,8 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
-    "jsx": "react"
+    "jsx": "react",
+    "ignoreDeprecations": "6.0"
   },
   "ts-node": {
     "require": ["tsconfig-paths/register"]

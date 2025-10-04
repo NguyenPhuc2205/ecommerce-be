@@ -9,10 +9,11 @@ import { CustomZodValidationPipe } from 'src/common/pipes'
 import { ZodSerializerInterceptor } from 'nestjs-zod'
 import { RolesModule } from './modules/roles/roles.module'
 import { LanguagesModule } from './modules/languages/languages.module'
-import { AuthenticationGuard } from 'src/common/guards'
+import { AuthenticationGuard, JwtAuthGuard, XApiKeyGuard } from 'src/common/guards'
 import { CatchEverythingFilter } from 'src/common/filters/catch-everything.filter'
 import { UsersModule } from './modules/users/users.module'
 import { VerificationCodesModule } from './modules/verification-codes/verification-codes.module'
+import { PermissionsModule } from './modules/permissions/permissions.module'
 
 @Module({
   imports: [
@@ -23,10 +24,13 @@ import { VerificationCodesModule } from './modules/verification-codes/verificati
     LanguagesModule,
     UsersModule,
     VerificationCodesModule,
+    PermissionsModule,
   ],
   controllers: [AppController],
   providers: [
     AppService,
+    JwtAuthGuard,
+    XApiKeyGuard,
 
     // Global Guard (Auth for x-api-key, jwt, etc.)
     {

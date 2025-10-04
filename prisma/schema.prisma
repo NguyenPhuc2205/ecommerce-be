@@ -53,7 +53,7 @@ model User {
   password    String     @db.VarChar(500)
   phoneNumber String     @db.VarChar(50)
   avatar      String?    @db.VarChar(1000)
-  cover      String?    @db.VarChar(1000)
+  cover       String?    @db.VarChar(1000)
   totpSecret  String?    @db.VarChar(1000)
   status      UserStatus @default(INACTIVE)
   roleId      Int
@@ -767,7 +767,7 @@ enum OTPDeliveryMethod {
 
 enum UserStatus {
   ACTIVE
-  INACTIVE
+  INACTIVE  // User registered but not activated yet
   BLOCKED
 }
 
