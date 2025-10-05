@@ -1,3 +1,5 @@
+export * from './api-response.interface'
+
 export type { IJwtPayload } from './jwt-payload.interface'
 
 export type { IFormattedZodError } from './zod.interface'
@@ -14,3 +16,5 @@ export type {
 } from './user-image.interface'
 
 export type { ITokenPair } from './token.interface'
+
+export * from './verification-code.interface'

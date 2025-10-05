@@ -4,7 +4,14 @@ import { IFormattedZodError } from 'src/common/interfaces/zod.interface'
  * Interface representing detailed error information.
  */
 export interface IErrorDetail {
+  /** Error code for client handling */
+  code?: string
+
+  /** Field-level validation errors */
   validationErrors?: IFormattedZodError[]
+
+  /** Additional error details or context */
+  details?: unknown
 }
 
 /**
