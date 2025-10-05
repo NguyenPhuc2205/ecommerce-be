@@ -1,3 +1,4 @@
+import { User } from '@prisma/client'
 import { IFormattedZodError } from 'src/common/interfaces/zod.interface'
 
 /**
@@ -26,7 +27,7 @@ export interface IApiResponse<T = any> {
   message: string
 
   /** Response payload - contains actual data or null on error */
-  data: T | null
+  data: T
 
   /** Error information - only present when success = false */
   errors?: IErrorDetail
@@ -37,3 +38,11 @@ export interface IApiResponse<T = any> {
   /** Request trace ID (for debugging purposes) */
   traceId?: string
 }
+
+const x: IApiResponse<User | null> = {
+  message: 'User not found',
+  data: null,
+  success: false,
+  timestamp: new Date().toISOString(),
+}
+console.log(x)

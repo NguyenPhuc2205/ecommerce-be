@@ -14,6 +14,7 @@ import { CatchEverythingFilter } from 'src/common/filters/catch-everything.filte
 import { UsersModule } from './modules/users/users.module'
 import { VerificationCodesModule } from './modules/verification-codes/verification-codes.module'
 import { PermissionsModule } from './modules/permissions/permissions.module'
+import { ResponseTransformInterceptor } from 'src/common/interceptors'
 
 @Module({
   imports: [
@@ -44,10 +45,23 @@ import { PermissionsModule } from './modules/permissions/permissions.module'
       useClass: CustomZodValidationPipe,
     },
 
-    // Global Zod Serializer Interceptor
+    /**
+     * Global Zod Serializer Interceptor.
+     * Used with '@ZodSerializerDto' or '@ZodResponse' to transform & serialize responses based on Zod schemas.
+     */
     {
       provide: APP_INTERCEPTOR,
       useClass: ZodSerializerInterceptor,
+    },
+
+    /**
+     * Global Response Transform Interceptor
+     * Wraps all successful responses into standard IApiResponse format.
+     * Runs after ZodSerializerInterceptor to ensure data is validated/serialized first.
+     */
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ResponseTransformInterceptor,
     },
 
     // Global Filters to catch exceptions

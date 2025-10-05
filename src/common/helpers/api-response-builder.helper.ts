@@ -18,7 +18,7 @@ export class ApiResponseBuilder {
    * @example
    * return ApiResponseBuilder.success(null, 'User deleted successfully')
    */
-  static success<T>(message: string, data: T | null, traceId?: string): IApiResponse<T | null> {
+  static success<T>(message: string, data: T, traceId?: string): IApiResponse<T> {
     return {
       success: true,
       data,
