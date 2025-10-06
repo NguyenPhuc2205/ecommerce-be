@@ -1,16 +1,14 @@
-export const REQUEST_CURRENT_USER_KEY = 'currentUser' as const
-
 export const AUTH_STRATEGIES = {
-  JWT: 'jwt',
-  API_KEY: 'api_key',
-  NONE: 'none',
+  JWT: 'JWT',
+  API_KEY: 'API_KEY',
+  NONE: 'NONE',
 } as const
 
 export type AuthStrategy = (typeof AUTH_STRATEGIES)[keyof typeof AUTH_STRATEGIES]
 
 export const GUARD_CONDITIONS = {
-  AND: 'and',
-  OR: 'or',
+  AND: 'AND',
+  OR: 'OR',
 } as const
 
 export type GuardCondition = (typeof GUARD_CONDITIONS)[keyof typeof GUARD_CONDITIONS]
