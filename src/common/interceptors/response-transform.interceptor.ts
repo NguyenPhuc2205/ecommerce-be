@@ -2,8 +2,8 @@ import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nes
 import { HttpArgumentsHost } from '@nestjs/common/interfaces'
 import { Request } from 'express'
 import { map, Observable } from 'rxjs'
-import { ApiResponseBuilder } from 'src/common/helpers'
-import { IApiResponse } from 'src/common/interfaces'
+import { ApiResponseBuilder } from '@/common/helpers'
+import { IApiResponse } from '@/common/interfaces'
 
 /**
  * Global Response Transform Interceptor
@@ -43,7 +43,7 @@ export class ResponseTransformInterceptor<T> implements NestInterceptor<T, IApiR
         const responseData = this.extractData(controllerResponse)
 
         // Wrap in standard API response format
-        return ApiResponseBuilder.success<T>(message, responseData, traceId)
+        return ApiResponseBuilder.success<T>(responseData, message, traceId)
       }),
     )
   }

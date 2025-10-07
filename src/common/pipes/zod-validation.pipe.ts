@@ -9,7 +9,7 @@ export const CustomZodValidationPipe: typeof ZodValidationPipe = createZodValida
       path: issue.path.join('.'),
     }))
 
-    console.log('Errors: ', error)
+    console.log('Formatted Errors: ', formattedZodErrors)
     return new UnprocessableEntityException(formattedZodErrors)
   },
 })

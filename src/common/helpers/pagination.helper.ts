@@ -1,6 +1,13 @@
-import { PAGINATION_DEFAULTS } from 'src/common/constants'
-import { IPaginationMetadata } from 'src/common/interfaces/pagination.interface'
+import { PAGINATION_DEFAULTS } from '@/common/constants'
+import { IPaginationMetadata } from '@/common/interfaces/pagination.interface'
 
+/**
+ * Calculate pagination metadata for a paginated response.
+ * @param page - The current page number.
+ * @param limit - The number of items per page.
+ * @param totalItems - The total number of items across all pages.
+ * @returns The calculated pagination metadata.
+ */
 export const calculatePaginationMetadata = (page: number, limit: number, totalItems: number): IPaginationMetadata => {
   const totalPages = Math.ceil(totalItems / limit) || PAGINATION_DEFAULTS.TOTAL_PAGES
 

@@ -1,6 +1,6 @@
 import { Injectable, NestMiddleware } from '@nestjs/common'
 import { NextFunction, Request, Response } from 'express'
-import { CUSTOM_HEADER_KEY, TRACE_ID_KEY } from 'src/common/constants'
+import { CUSTOM_HEADER_KEY, TRACE_ID_KEY } from '@/common/constants'
 import { v4 as uuidv4 } from 'uuid'
 
 @Injectable()

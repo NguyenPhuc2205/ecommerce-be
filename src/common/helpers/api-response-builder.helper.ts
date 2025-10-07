@@ -1,6 +1,5 @@
-import { calculatePaginationMetadata } from 'src/common/helpers/pagination.helper'
-import { IApiResponse, IErrorDetail } from 'src/common/interfaces'
-import { IPaginatedData, IPaginationMetadata } from 'src/common/interfaces/pagination.interface'
+import { calculatePaginationMetadata } from '@/common/helpers/pagination.helper'
+import { IApiResponse, IErrorDetail, IPaginatedData, IPaginationMetadata } from '@/common/interfaces'
 
 export class ApiResponseBuilder {
   /**
@@ -18,7 +17,7 @@ export class ApiResponseBuilder {
    * @example
    * return ApiResponseBuilder.success(null, 'User deleted successfully')
    */
-  static success<T>(message: string, data: T, traceId?: string): IApiResponse<T> {
+  static success<T>(data: T, message: string = 'Operation successful', traceId?: string): IApiResponse<T> {
     return {
       success: true,
       data,
@@ -61,7 +60,7 @@ export class ApiResponseBuilder {
    *   metadata: { userId: id, role: 'ADMIN' }
    * })
    */
-  static error(message: string, errors?: IErrorDetail, traceId?: string): IApiResponse<null> {
+  static error(message: string = 'Operation failed', errors?: IErrorDetail, traceId?: string): IApiResponse<null> {
     return {
       success: false,
       message,
@@ -78,9 +77,9 @@ export class ApiResponseBuilder {
    *
    * @template T - Type of items in the paginated response
    * @param items - Array of items for current page
+   * @param totalItems - Total number of items across all pages
    * @param page - Current page number
    * @param limit - Number of items per page
-   * @param totalItems - Total number of items across all pages
    * @param message - Success message (default: 'Data retrieved successfully')
    * @param traceId - Request trace identifier for debugging
    * @returns Formatted paginated success response
@@ -94,11 +93,11 @@ export class ApiResponseBuilder {
    * return ApiResponseBuilder.paginated(items, page, limit, total)
    */
   static paginated<T>(
-    message: string = 'Data retrieved successfully',
     items: T[],
     totalItems: number,
     page: number,
     limit: number,
+    message: string = 'Data retrieved successfully',
     traceId?: string,
   ): IApiResponse<IPaginatedData<T>> {
     const pagination: IPaginationMetadata = calculatePaginationMetadata(page, limit, totalItems)

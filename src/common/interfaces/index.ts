@@ -2,6 +2,8 @@ export * from './api-response.interface'
 
 export type { IJwtPayload } from './jwt-payload.interface'
 
+export * from './pagination.interface'
+
 export type { IFormattedZodError } from './zod.interface'
 
 export type {
