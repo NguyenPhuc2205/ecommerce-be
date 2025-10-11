@@ -8,10 +8,13 @@ export interface IErrorDetail {
   code?: string
 
   /** Field-level validation errors */
-  validationErrors?: IFormattedZodError[] | null
+  validationErrors: IFormattedZodError[] | null
 
   /** Additional error details or context */
   details?: unknown
+
+  /** More information about the error */
+  [key: string]: unknown
 }
 
 /**
@@ -29,7 +32,7 @@ export interface IApiResponse<T = any> {
   data: T
 
   /** Error information - only present when success = false */
-  errors?: IErrorDetail
+  errors?: IErrorDetail | null
 
   /** Timestamp of the response in ISO 8601 format */
   timestamp: string
