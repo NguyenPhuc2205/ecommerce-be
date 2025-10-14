@@ -5,16 +5,17 @@ import { SharedModule } from './shared/shared.module'
 import { ConfigurationModule } from './configuration/configuration.module'
 import { AuthModule } from './modules/auth/auth.module'
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
-import { CustomZodValidationPipe } from 'src/common/pipes'
+import { CustomZodValidationPipe } from '@/common/pipes'
 import { ZodSerializerInterceptor } from 'nestjs-zod'
 import { RolesModule } from './modules/roles/roles.module'
 import { LanguagesModule } from './modules/languages/languages.module'
-import { AuthenticationGuard, JwtAuthGuard, XApiKeyGuard } from 'src/common/guards'
-import { CatchEverythingFilter } from 'src/common/filters/catch-everything.filter'
+import { AuthenticationGuard, JwtAuthGuard, XApiKeyGuard } from '@/common/guards'
+import { CatchEverythingFilter } from '@/common/filters/catch-everything.filter'
 import { UsersModule } from './modules/users/users.module'
 import { VerificationCodesModule } from './modules/verification-codes/verification-codes.module'
 import { PermissionsModule } from './modules/permissions/permissions.module'
-import { ResponseTransformInterceptor } from 'src/common/interceptors'
+import { ResponseTransformInterceptor } from '@/common/interceptors'
+import { HttpExceptionFilter } from '@/common/filters'
 
 @Module({
   imports: [
@@ -55,7 +56,7 @@ import { ResponseTransformInterceptor } from 'src/common/interceptors'
     },
 
     /**
-     * Global Response Transform Interceptor
+     * Global Response Transform Interceptor.
      * Wraps all successful responses into standard IApiResponse format.
      * Runs after ZodSerializerInterceptor to ensure data is validated/serialized first.
      */
@@ -64,10 +65,21 @@ import { ResponseTransformInterceptor } from 'src/common/interceptors'
       useClass: ResponseTransformInterceptor,
     },
 
-    // Global Filters to catch exceptions
+    /**
+     * Global Filters to catch exceptions.
+     */
     {
       provide: APP_FILTER,
       useClass: CatchEverythingFilter,
+    },
+
+    /**
+     * Global HTTP Exception Filter.
+     * It will catch first all exceptions that are instances of HttpException.
+     */
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
     },
   ],
 })

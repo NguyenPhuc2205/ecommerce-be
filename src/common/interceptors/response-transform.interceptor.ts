@@ -4,7 +4,7 @@ import { Request } from 'express'
 import { map, Observable } from 'rxjs'
 import { ApiResponseBuilder } from '@/common/helpers'
 import { IApiResponse } from '@/common/interfaces'
-import { CUSTOM_HEADER_KEY } from '@/common/constants'
+import { CUSTOM_HEADER_KEY, TRACE_ID_KEY } from '@/common/constants'
 
 /**
  * Global Response Transform Interceptor.
@@ -81,7 +81,11 @@ export class ResponseTransformInterceptor<T> implements NestInterceptor<T, IApiR
    *
    */
   private extractTraceId(request: Request): string | undefined {
-    const traceId = request.headers[CUSTOM_HEADER_KEY.TRACE_ID] || request.headers[CUSTOM_HEADER_KEY.REQUEST_ID]
+    const traceId =
+      request.headers[CUSTOM_HEADER_KEY.TRACE_ID] ||
+      request.headers[CUSTOM_HEADER_KEY.REQUEST_ID] ||
+      request[TRACE_ID_KEY]
+
     if (typeof traceId === 'string' && traceId.trim().length > 0) {
       return traceId.trim()
     }

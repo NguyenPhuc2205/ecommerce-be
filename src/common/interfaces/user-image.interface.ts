@@ -1,4 +1,4 @@
-import { ImageSource } from 'src/common/constants'
+import { ImageSource } from '@/common/constants'
 
 export interface IAvatarConfig {
   size?: number

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common'
-import { ResendEmailService } from 'src/shared/email/resend-email.service'
+import { ResendEmailService } from '@/shared/email/resend-email.service'
 
 @Module({
   providers: [ResendEmailService],

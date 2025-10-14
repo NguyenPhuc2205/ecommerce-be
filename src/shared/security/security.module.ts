@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common'
-import { HashingService } from 'src/shared/security/hashing.service'
+import { HashingService } from '@/shared/security/hashing.service'
 
 @Module({
   providers: [HashingService],

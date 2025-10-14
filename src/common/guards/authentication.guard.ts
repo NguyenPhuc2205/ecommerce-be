@@ -1,9 +1,15 @@
-import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common'
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  InternalServerErrorException,
+  UnauthorizedException,
+} from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
-import { AUTH_STRATEGIES, AuthMetadata, AuthStrategy, GUARD_CONDITIONS } from 'src/common/constants'
-import { AUTH_STRATEGIES_KEY } from 'src/common/decorators'
-import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard'
-import { XApiKeyGuard } from 'src/common/guards/x-api-key.guard'
+import { AUTH_STRATEGIES, AuthMetadata, AuthStrategy, GUARD_CONDITIONS } from '@/common/constants'
+import { AUTH_STRATEGIES_KEY } from '@/common/decorators'
+import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard'
+import { XApiKeyGuard } from '@/common/guards/x-api-key.guard'
 
 @Injectable()
 export class AuthenticationGuard implements CanActivate {
@@ -42,7 +48,7 @@ export class AuthenticationGuard implements CanActivate {
       return this.executeAndCondition(guards, context)
     }
 
-    throw new Error(`Unsupported guard condition: ${authMetadata.options.condition as string}.`)
+    throw new InternalServerErrorException(`Unsupported guard condition: ${authMetadata.options.condition as string}.`)
   }
 
   /**

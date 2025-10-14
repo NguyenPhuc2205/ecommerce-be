@@ -1,5 +1,5 @@
-import { IMAGE_SOURCES, USER_IMAGES, UserImage, ImageSource } from 'src/common/constants'
-import { AVATAR_STYLES, COVER_THEMES, TRENDING_COLORS, GRADIENT_COMBOS } from 'src/common/constants/color.constant'
+import { IMAGE_SOURCES, USER_IMAGES, UserImage, ImageSource } from '@/common/constants'
+import { AVATAR_STYLES, COVER_THEMES, TRENDING_COLORS, GRADIENT_COMBOS } from '@/common/constants/color.constant'
 import {
   IAvatarConfig,
   IImageResult,
@@ -9,7 +9,7 @@ import {
   IUserImages,
   IAvatarOption,
   ICoverOption,
-} from 'src/common/interfaces/user-image.interface'
+} from '@/common/interfaces/user-image.interface'
 
 /**
  * Generates a unique seed based on user information using djb2 hash function.

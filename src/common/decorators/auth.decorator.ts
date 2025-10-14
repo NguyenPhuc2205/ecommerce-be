@@ -1,5 +1,5 @@
 import { SetMetadata } from '@nestjs/common'
-import { AuthMetadata, AuthStrategy, GUARD_CONDITIONS, GuardCondition } from 'src/common/constants'
+import { AuthMetadata, AuthStrategy, GUARD_CONDITIONS, GuardCondition } from '@/common/constants'
 
 export const AUTH_STRATEGIES_KEY = 'authStrategies'
 

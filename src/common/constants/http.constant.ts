@@ -1,5 +1,6 @@
 export const CUSTOM_HEADER_KEY = {
   TRACE_ID: 'x-trace-id',
+  REQUEST_ID: 'x-request-id',
 } as const
 
 export type CustomHeaderKey = (typeof CUSTOM_HEADER_KEY)[keyof typeof CUSTOM_HEADER_KEY]

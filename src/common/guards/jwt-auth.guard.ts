@@ -1,12 +1,11 @@
-import { REQUEST_CURRENT_USER_KEY } from './../constants/auth.constant'
+import { REQUEST_CURRENT_USER_KEY, TOKEN_TYPES } from '@/common/constants'
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common'
 import { HttpArgumentsHost } from '@nestjs/common/interfaces'
 import { Reflector } from '@nestjs/core'
 import { Request } from 'express'
-import { TOKEN_TYPES } from 'src/common/constants'
-import { IS_PUBLIC_KEY } from 'src/common/decorators/is-public.decorator'
-import { IJwtPayload } from 'src/common/interfaces'
-import { TokenService } from 'src/shared/token/token.service'
+import { IS_PUBLIC_KEY } from '@/common/decorators/is-public.decorator'
+import { IJwtPayload } from '@/common/interfaces'
+import { TokenService } from '@/shared/token/token.service'
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {

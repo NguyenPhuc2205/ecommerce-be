@@ -1,4 +1,4 @@
-import { IFormattedZodError } from 'src/common/interfaces'
+import { IFormattedZodError } from '@/common/interfaces'
 import z, { ZodError } from 'zod'
 
 /**

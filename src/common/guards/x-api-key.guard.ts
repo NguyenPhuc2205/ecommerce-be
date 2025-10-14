@@ -3,7 +3,7 @@ import { HttpArgumentsHost } from '@nestjs/common/interfaces'
 import { ConfigService } from '@nestjs/config'
 import { Request } from 'express'
 import { Observable } from 'rxjs'
-import { EnvConfig } from 'src/configuration/env.schema'
+import { EnvConfig } from '@/configuration/env.schema'
 
 @Injectable()
 export class XApiKeyGuard implements CanActivate {

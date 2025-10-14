@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { JwtService, JwtSignOptions } from '@nestjs/jwt'
 import { Request } from 'express'
-import { TOKEN_TYPES, TokenType } from 'src/common/constants'
-import { IJwtPayload, ITokenPair } from 'src/common/interfaces'
-import { CONFIGURATION_PROVIDER_TOKENS } from 'src/configuration/configuration.constant'
+import { TOKEN_TYPES, TokenType } from '@/common/constants'
+import { IJwtPayload, ITokenPair } from '@/common/interfaces'
+import { CONFIGURATION_PROVIDER_TOKENS } from '@/configuration/configuration.constant'
 
 @Injectable()
 export class TokenService {
