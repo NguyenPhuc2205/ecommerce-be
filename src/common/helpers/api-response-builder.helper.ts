@@ -60,7 +60,11 @@ export class ApiResponseBuilder {
    *   metadata: { userId: id, role: 'ADMIN' }
    * })
    */
-  static error(message: string = 'Operation failed', errors?: IErrorDetail, traceId?: string): IApiResponse<null> {
+  static error(
+    message: string = 'Operation failed',
+    errors: IErrorDetail | null,
+    traceId?: string,
+  ): IApiResponse<null> {
     return {
       success: false,
       message,

@@ -90,6 +90,11 @@ export class ResponseTransformInterceptor<T> implements NestInterceptor<T, IApiR
       return traceId.trim()
     }
 
+    if (Array.isArray(traceId)) {
+      const mergedTraceId = traceId.join('_')
+      return mergedTraceId
+    }
+
     return undefined
   }
 
