@@ -10,6 +10,9 @@ export const CustomZodValidationPipe: typeof ZodValidationPipe = createZodValida
     }))
 
     console.log('Formatted Errors: ', formattedZodErrors)
-    return new UnprocessableEntityException(formattedZodErrors)
+    return new UnprocessableEntityException({
+      message: 'Validation failed',
+      validationErrors: formattedZodErrors,
+    })
   },
 })

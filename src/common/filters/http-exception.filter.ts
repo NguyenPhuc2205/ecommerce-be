@@ -9,6 +9,12 @@ import { Request, Response } from 'express'
 /**
  * Global HTTP Exception Filter
  * Catches all HttpExceptions and formats the response.
+ *
+ * Flows:
+ * 1. Extract trace ID from request headers or properties.
+ * 2. Extract error message from exception response (String or object has message property or fallback).
+ * 3. Extract validation errors (if any) from exception response.
+ * 4. Build standardized error response.
  */
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {

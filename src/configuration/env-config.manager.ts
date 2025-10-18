@@ -1,6 +1,6 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common'
-import { formatZodError } from 'src/common/helpers'
-import { EnvConfig, envConfigSchema } from 'src/configuration/env.schema'
+import { formatZodError } from '@/common/helpers'
+import { EnvConfig, envConfigSchema } from '@/configuration/env.schema'
 import { ZodError } from 'zod'
 import { config } from 'dotenv'
 

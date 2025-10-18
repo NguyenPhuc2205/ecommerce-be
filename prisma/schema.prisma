@@ -9,6 +9,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output = "../node_modules/.prisma/client"
 }
 
 generator json {
@@ -50,8 +51,8 @@ model User {
   id          Int        @id @default(autoincrement())
   email       String     @unique @db.VarChar(500)
   name        String     @db.VarChar(500)
-  password    String     @db.VarChar(500)
   phoneNumber String     @db.VarChar(50)
+  password    String     @db.VarChar(500)
   avatar      String?    @db.VarChar(1000)
   cover       String?    @db.VarChar(1000)
   totpSecret  String?    @db.VarChar(1000)

@@ -1,5 +1,5 @@
 import z from 'zod'
-import { Environment, LogLevel } from 'src/common/enums'
+import { Environment, LogLevel } from '@/common/enums'
 import {
   createNonEmptyStringSchema,
   createPortSchema,
@@ -9,7 +9,7 @@ import {
   createPositiveIntSchema,
   createRangeSchema,
   createStringArraySchema,
-} from 'src/common/helpers'
+} from '@/common/helpers'
 
 export const envConfigSchema = z.object({
   // ===========================
@@ -149,6 +149,11 @@ export const envConfigSchema = z.object({
   // OTP CONFIGURATION
   // ===========================
   OTP_EXPIRATION: createExpirationSchema().default('10m'),
+
+  // ===========================
+  // EMAIL SERVICE - RESEND
+  // ===========================
+  RESEND_API: createNonEmptyStringSchema(),
 })
 
 export type EnvConfig = z.infer<typeof envConfigSchema>
