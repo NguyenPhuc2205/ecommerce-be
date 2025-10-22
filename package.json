@@ -1,10 +1,18 @@
 {
   "name": "backend-ecommerce",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Ecommerce backend application built with NestJS, PostgreSQL, Prisma...",
+  "author": "Phuc Nguyen Huu",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NguyenPhuc2205/ecommerce-be.git"
+  },
+  "homepage": "https://github.com/NguyenPhuc2205/ecommerce-be#readme",
+  "bugs": {
+    "url": "https://github.com/NguyenPhuc2205/ecommerce-be/issues"
+  },
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.{ts,tsx}\" \"test/**/*.{ts,tsx}\" \"prisma/**/*.{ts,tsx}\" \"emails/**/*.{ts,tsx}\"",
@@ -21,6 +29,12 @@
     "seed": "ts-node prisma/seeders/index.ts",
     "seed:dev": "npm run seed",
     "seed:prod": "node dist/prisma/seeders/index.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio",
+    "prisma:db:push": "prisma db push",
+    "prisma:db:pull": "prisma db pull",
+    "prisma:format": "prisma format",
     "prepare": "husky",
     "commit": "cz",
     "lint:check": "eslint \"{src,apps,libs,test}/**/*.ts\"",
@@ -30,7 +44,10 @@
     "email:dev": "email dev",
     "email:export": "email export",
     "email:help": "email --help",
-    "email:start": "email start"
+    "email:start": "email start",
+    "release": "semantic-release",
+    "release:dry": "semantic-release --dry-run",
+    "release:debug": "semantic-release --debug -dry-run"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -71,7 +88,10 @@
     "@nestjs/testing": "^11.0.1",
     "@react-email/preview-server": "4.2.11",
     "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.0",
+    "@semantic-release/release-notes-generator": "^14.1.0",
     "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.0",
     "@types/jest": "^30.0.0",
