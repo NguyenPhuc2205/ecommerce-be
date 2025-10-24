@@ -101,7 +101,7 @@ module.exports = {
     'subject-min-length': [2, 'always', 10],
     'header-max-length': [2, 'always', 120],
     'body-leading-blank': [2, 'always'],
-    'body-max-line-length': [2, 'always', 150],
+    'body-max-line-length': [0, 'always', 150],
     'footer-leading-blank': [2, 'always'],
   },
 }

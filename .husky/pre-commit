@@ -1,3 +1,9 @@
 #!/bin/sh
+# Skip lint-staged if the commit message contains [skip ci] or is a release commit
+if git log -1 --pretty=%B | grep -qE "\[skip ci\]|chore\(release\)"; then
+  echo "🔹 Skipping lint-staged for release commit"
+  exit 0
+fi
+
 # Husky v9 pre-commit hook
 pnpm exec lint-staged
