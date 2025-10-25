@@ -415,7 +415,7 @@ class ZipCreator {
         oldZipFiles.forEach((file) => {
           const filePath = path.join(this.releasesDir, file)
           fs.unlinkSync(filePath) // Synchronous file deletion
-          console.log(`   Removed: ${file}`)
+          console.log(`Removed: ${file}`)
         })
         console.log('')
       }
