@@ -1,6 +1,6 @@
 {
   "name": "backend-ecommerce",
-  "version": "0.0.1",
+  "version": "1.1.0",
   "description": "Ecommerce backend application built with NestJS, PostgreSQL, Prisma...",
   "author": "Phuc Nguyen Huu",
   "private": true,
