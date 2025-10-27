@@ -1,5 +1,5 @@
 import { PrismaClient, HTTPMethod } from '@prisma/client'
-import { ROLE_NAMES } from 'src/common/constants'
+import { ROLE_NAMES } from '@/common/constants'
 
 export class PermissionSeeder {
   constructor(private readonly prisma: PrismaClient) {}

@@ -14,7 +14,7 @@
     "sourceMap": true,
     "outDir": "./dist",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
     },
     "incremental": true,
     "skipLibCheck": true,
@@ -28,6 +28,6 @@
   "ts-node": {
     "require": ["tsconfig-paths/register"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "test/**/*.ts", "emails/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "test/**/*.ts", "emails/**/*.ts", "prisma/**/*.ts"],
   "exclude": ["node_modules"]
 }

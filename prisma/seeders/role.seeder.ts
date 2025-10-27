@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import { ROLE_NAMES } from 'src/common/constants'
+import { ROLE_NAMES } from '@/common/constants'
 
 export class RoleSeeder {
   constructor(private readonly prisma: PrismaClient) {}

@@ -55,53 +55,53 @@
           "types": [
             {
               "type": "feat",
-              "section": "✨ Features"
+              "section": ":sparkles: Features"
             },
             {
               "type": "fix",
-              "section": "🐛 Bug Fixes"
+              "section": ":bug: Bug Fixes"
             },
             {
               "type": "perf",
-              "section": "⚡ Performance Improvements"
+              "section": ":zap: Performance Improvements"
             },
             {
               "type": "revert",
-              "section": "⏪ Reverts"
+              "section": ":rewind: Reverts"
             },
             {
               "type": "docs",
-              "section": "📝 Documentation",
+              "section": ":memo: Documentation",
               "hidden": false
             },
             {
               "type": "style",
-              "section": "💄 Styles",
+              "section": ":lipstick: Styles",
               "hidden": true
             },
             {
               "type": "chore",
-              "section": "🔧 Miscellaneous Chores",
+              "section": ":wrench: Miscellaneous Chores",
               "hidden": true
             },
             {
               "type": "refactor",
-              "section": "♻️ Code Refactoring",
+              "section": ":recycle: Code Refactoring",
               "hidden": false
             },
             {
               "type": "test",
-              "section": "✅ Tests",
+              "section": ":white_check_mark: Tests",
               "hidden": true
             },
             {
               "type": "build",
-              "section": "📦 Build System",
+              "section": ":package: Build System",
               "hidden": true
             },
             {
               "type": "ci",
-              "section": "👷 Continuous Integration",
+              "section": ":construction_worker: Continuous Integration",
               "hidden": true
             }
           ]

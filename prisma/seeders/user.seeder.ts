@@ -1,6 +1,6 @@
 import { PrismaClient, UserStatus } from '@prisma/client'
 import * as bcrypt from 'bcrypt'
-import { ROLE_NAMES } from 'src/common/constants'
+import { ROLE_NAMES } from '@/common/constants'
 
 export class UserSeeder {
   constructor(private readonly prisma: PrismaClient) {}
