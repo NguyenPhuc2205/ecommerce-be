@@ -1,24 +1,41 @@
+import { OTP_CONFIGS, VerificationCodeType } from '@/common/constants'
+import { IOTPConfig, IOTPResult, IVerifyOTPResult } from '@/common/interfaces'
+import { HashingService } from '@/shared/security/hashing.service'
 import { Injectable } from '@nestjs/common'
 import { randomInt } from 'crypto'
-import { IOTPConfig, IOTPResult, IVerifyOTPResult } from 'src/common/interfaces'
-import { HashingService } from 'src/shared/security/hashing.service'
+
 @Injectable()
 export class OtpService {
   constructor(private readonly hashingService: HashingService) {}
 
-  public generateOTPWithExpiry(config: IOTPConfig): IOTPResult {
+  // ================================================================
+  // MAIN METHODS
+  // ================================================================
+  /**
+   * Generates a secure OTP (One-Time Password).
+   * @param type - The type of OTP to generate.
+   * @param customConfig - Optional custom configuration for the OTP.
+   * @returns The generated OTP and its hashed version.
+   */
+  public async generateOTPWithExpiry(type: VerificationCodeType, customConfig?: IOTPConfig): Promise<IOTPResult> {
+    const config = customConfig || this.getOTPConfig(type)
     const code = this.generateSecureOTP(config.length, config.includeLetters)
-    const hashedCode = this.hashingService.hash(code)
-    const expiresAt = new Date(Date.now() + config.expiryMinutes * 60 * 1000)
-
+    const hashedCode = await this.hashingService.hash(code)
     return {
       code,
       hashedCode,
-      expiresAt,
+      expiresAt: new Date(Date.now() + config.expiryMinutes * 60 * 1000),
     }
   }
 
-  public verifyOTP(code: string, hashedCode: string, expiresAt: Date): IVerifyOTPResult {
+  /**
+   * Verifies the provided OTP code against the hashed code and checks for expiration.
+   * @param code - The OTP code to verify.
+   * @param hashedCode - The hashed version of the OTP code.
+   * @param expiresAt - The expiration date of the OTP code.
+   * @returns The result of the verification process.
+   */
+  public async verifyOTP(code: string, hashedCode: string, expiresAt: Date): Promise<IVerifyOTPResult> {
     if (new Date() > expiresAt) {
       return {
         valid: false,
@@ -27,41 +44,52 @@ export class OtpService {
       }
     }
 
-    const isValid: boolean = this.hashingService.compare(code, hashedCode)
+    const isValidCode: boolean = await this.hashingService.compare(code, hashedCode)
     return {
-      valid: isValid,
+      valid: isValidCode,
       expired: false,
-      message: isValid ? 'Verification code is valid' : 'Invalid verification code',
+      message: isValidCode ? 'Verification code is valid' : 'Invalid verification code',
     }
+  }
+
+  // ================================================================
+  // HELPER FUNCTIONS
+  // ================================================================
+  /**
+   * Retrieves the OTP configuration for the specified type.
+   * @param type - The type of OTP.
+   * @returns The OTP configuration.
+   */
+  private getOTPConfig(type: VerificationCodeType) {
+    return OTP_CONFIGS[type]
   }
 
   /**
    * Generates a secure OTP (One-Time Password).
-   * @param length The length of the OTP (between 4 and 10).
-   * @param includeLetters Whether to include letters in the OTP.
+   * @param length - The length of the OTP.
+   * @param includeLetters - Whether to include letters in the OTP.
    * @returns The generated OTP.
    */
-  private generateSecureOTP(length: number, includeLetters = false): string {
-    if (length < 4 || length > 10) {
-      throw new Error('OTP length must be between 4 and 10')
+  private generateSecureOTP(length: number, includeLetters?: boolean): string {
+    if (length < 4 || length > 12) {
+      throw new Error('OTP length must be between 4 and 12')
     }
 
     const digits = '0123456789'
-    const letters = 'ABCDEFGHJKLMNPQRSTUVWXYZ' // Exclude I, O to avoid confusion with 0, 1
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
     const characters = includeLetters ? digits + letters : digits
 
-    let otp = ''
+    let otp: string = ''
+
     for (let i = 0; i < length; ++i) {
-      const index = randomInt(0, characters.length) // 0 <= index < characters.length
-      otp += characters[index]
+      const randomIndex = randomInt(0, characters.length)
+      otp += characters[randomIndex]
     }
 
-    // If includeLetters is true, ensure at least one digit exists
+    // Ensure at least one digit is included if letters are used
     if (includeLetters && !/\d/.test(otp)) {
       const randomPosition = randomInt(0, length)
       const randomDigit = digits[randomInt(0, digits.length)]
-
-      // String is immutable, cannot modify directly with index (ABCXYZ -> 'ABC' + '1' + 'YZ')
       otp = otp.substring(0, randomPosition) + randomDigit + otp.substring(randomPosition + 1)
     }
 
