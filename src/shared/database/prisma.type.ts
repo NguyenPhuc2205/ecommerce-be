@@ -1,4 +1,5 @@
 import { PrismaService } from '@/shared/database/prisma.service'
+import { Prisma } from '@prisma/client'
 import { ITXClientDenyList } from '@prisma/client/runtime/library'
 
 /**
@@ -10,3 +11,9 @@ import { ITXClientDenyList } from '@prisma/client/runtime/library'
  * that are not available or should not be called within a transaction context.
  */
 export type PrismaTransactionClient = Omit<PrismaService, ITXClientDenyList>
+
+/**
+ * Raw Prisma Transaction Client type.
+ * Directly represents the Prisma TransactionClient from the Prisma library.
+ */
+export type RawPrismaTransactionClient = Prisma.TransactionClient
