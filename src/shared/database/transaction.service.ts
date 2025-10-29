@@ -1,6 +1,6 @@
-import { TransactionOptions } from '@/shared/database/prisma.interface'
+import { TransactionOptions } from '@/common/interfaces'
+import { PrismaTransactionClient } from '@/common/types'
 import { PrismaService } from '@/shared/database/prisma.service'
-import { PrismaTransactionClient } from '@/shared/database/prisma.type'
 import { Injectable } from '@nestjs/common'
 import { Prisma } from '@prisma/client'
 

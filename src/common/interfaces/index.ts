@@ -4,6 +4,8 @@ export type { IJwtPayload } from './jwt-payload.interface'
 
 export * from './pagination.interface'
 
+export * from './prisma.interface'
+
 export type { IFormattedZodError } from './zod.interface'
 
 export type {
