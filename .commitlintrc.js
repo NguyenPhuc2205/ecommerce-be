@@ -89,6 +89,8 @@ module.exports = {
         'seeder',
         'migration',
         'common',
+        'prisma',
+        'orm',
       ],
     ],
 
