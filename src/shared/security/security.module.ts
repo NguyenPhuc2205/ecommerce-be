@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common'
-import { HashingService } from '@/shared/security/hashing.service'
+import { HashingModule } from '@/shared/security/hashing/hashing.module'
+import { RateLimitingModule } from '@/shared/security/rate-limiting/rate-limiting.module'
 
+const securityModules = [HashingModule, RateLimitingModule]
 @Module({
-  providers: [HashingService],
-  exports: [HashingService],
+  providers: securityModules,
+  exports: securityModules,
 })
 export class SecurityModule {}
