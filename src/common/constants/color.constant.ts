@@ -1,3 +1,12 @@
+/**
+ * Color-related constants.
+ *
+ * @module ColorConstants
+ */
+/**
+ * A collection of trending color hex codes.
+ * These colors are selected based on current design trendss and popular palettes.
+ */
 export const TRENDING_COLORS = [
   // Warm & Cozy
   '#FFBE98',
@@ -72,6 +81,10 @@ export const TRENDING_COLORS = [
   '#AAAFB2',
 ] as const
 
+/**
+ * A collection of gradient color combinations.
+ * Each combination consists of two hex color codes that blend well together.
+ */
 export const GRADIENT_COMBOS = [
   ['#667eea', '#764ba2'],
   ['#f093fb', '#f5576c'],
@@ -90,6 +103,10 @@ export const GRADIENT_COMBOS = [
   ['#fad0c4', '#ffd1ff'],
 ] as const
 
+/**
+ * Predefined themes for generating cover images.
+ * These themes can be used with image generation services to create visually appealing covers.
+ */
 export const COVER_THEMES = [
   'abstract,minimal',
   'nature,landscape',
@@ -111,6 +128,10 @@ export const COVER_THEMES = [
   'art,creative',
 ] as const
 
+/**
+ * Available avatar styles for generating user avatars.
+ * These styles can be used with avatar generation services to create unique user profile images.
+ */
 export const AVATAR_STYLES = [
   'avataaars',
   'big-ears',
