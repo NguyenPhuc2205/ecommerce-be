@@ -1,5 +1,5 @@
-import { PrismaService } from '@/shared/database/prisma.service'
 import { Prisma } from '@prisma/client'
+import { PrismaService } from '@/shared/database/prisma.service'
 import { ITXClientDenyList } from '@prisma/client/runtime/library'
 
 /**
