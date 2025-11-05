@@ -1,3 +1,3 @@
-export * from './prisma.type'
+export * from './express.d'
 
-export * from './type.d'
+export * from './prisma.d'
