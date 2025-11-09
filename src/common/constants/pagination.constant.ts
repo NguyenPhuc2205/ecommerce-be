@@ -8,6 +8,8 @@
  * @property MAX_LIMIT - Maximum items per page limit.
  * @property TOTAL_PAGES - Default total pages.
  * @property TOTAL_ITEMS - Default total items.
+ * @property UNLIMITED - Special value indicating no limit.
+ * @property MAX_UNLIMITED_ITEMS - Maximum items allowed when using UNLIMITED.
  */
 export const PAGINATION_DEFAULTS = {
   MIN_PAGE: 1,
@@ -19,6 +21,10 @@ export const PAGINATION_DEFAULTS = {
 
   TOTAL_PAGES: 1,
   TOTAL_ITEMS: 0,
+
+  /** Special value for 'get all' */
+  UNLIMITED: -1,
+  MAX_UNLIMITED_ITEMS: 1000,
 } as const
 
 export type PaginationDefaultKey = keyof typeof PAGINATION_DEFAULTS
