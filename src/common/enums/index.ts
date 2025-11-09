@@ -1,3 +1,5 @@
-export { Environment } from './environment.enum'
+export * from './environment.enum'
 
-export { LogLevel } from './log.enum'
+export * from './log.enum'
+
+export * from './prisma.enum'
