@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config'
 import { Request } from 'express'
 import { Observable } from 'rxjs'
 import { EnvConfig } from '@/configuration/env.schema'
+import { CUSTOM_HEADERS } from '@/common/constants'
 
 @Injectable()
 export class XApiKeyGuard implements CanActivate {
@@ -15,12 +16,16 @@ export class XApiKeyGuard implements CanActivate {
     const request: Request = http.getRequest()
 
     // Get API key from request headers
-    const xApiKey = request.headers['x-api-key'] || request.headers['X-API-KEY']
+    const xApiKey =
+      request.headers[CUSTOM_HEADERS.API_KEY.toLowerCase()] ||
+      request.headers[CUSTOM_HEADERS.API_KEY.toLocaleUpperCase()]
+
+    // If no API key is provided, throw an Unauthorized exception
     if (!xApiKey) {
       throw new UnauthorizedException('Missing API key, please provide a valid API key.')
     }
 
-    // Get API_KEY from .env config
+    // Get API_KEY from .env config & compare
     const apiKey = this.configService.get<string>('API_KEY')
 
     // Compare the API keys

@@ -1,4 +1,4 @@
-import { REQUEST_CURRENT_USER_KEY, TOKEN_TYPES } from '@/common/constants'
+import { REQUEST_CONTEXTS, TOKEN_TYPES } from '@/common/constants'
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common'
 import { HttpArgumentsHost } from '@nestjs/common/interfaces'
 import { Reflector } from '@nestjs/core'
@@ -39,7 +39,7 @@ export class JwtAuthGuard implements CanActivate {
       const payload: IJwtPayload = await this.tokenService.verify(TOKEN_TYPES.ACCESS, accessToken)
 
       // Attach user info to request object for further use (or request.currentUser = payload & define types)
-      request[REQUEST_CURRENT_USER_KEY] = payload
+      request[REQUEST_CONTEXTS.CURRENT_USER] = payload
 
       // Continue with the request processing
       return true
