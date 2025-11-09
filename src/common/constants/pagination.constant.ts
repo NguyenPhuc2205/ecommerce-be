@@ -1,9 +1,4 @@
 /**
- * Pagination configuration constants.
- *
- * @module PaginationConstants
- */
-/**
  * Pagination default values and types.
  *
  * @property MIN_PAGE - Minimum page number.
@@ -13,7 +8,6 @@
  * @property MAX_LIMIT - Maximum items per page limit.
  * @property TOTAL_PAGES - Default total pages.
  * @property TOTAL_ITEMS - Default total items.
- *
  */
 export const PAGINATION_DEFAULTS = {
   MIN_PAGE: 1,
@@ -36,7 +30,6 @@ export type PaginationDefault = (typeof PAGINATION_DEFAULTS)[keyof typeof PAGINA
  *
  * @property ASC - Ascending order.
  * @property DESC - Descending order.
- *
  */
 export const SORT_ORDER = ['ASC', 'DESC'] as const
 

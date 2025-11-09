@@ -1,9 +1,4 @@
 /**
- * Color-related constants.
- *
- * @module ColorConstants
- */
-/**
  * A collection of trending color hex codes.
  * These colors are selected based on current design trendss and popular palettes.
  */

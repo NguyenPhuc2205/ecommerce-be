@@ -8,8 +8,6 @@ export * from './pagination.constant'
 
 export * from './regex.constant'
 
-export * from './user-image.constant'
-
 export * from './token.constant'
 
 export * from './user.constant'

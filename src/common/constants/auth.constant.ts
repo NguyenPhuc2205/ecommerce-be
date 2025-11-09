@@ -1,8 +1,3 @@
-/**
- * Authentication & Authorizatrion constants, types.
- *
- * @module AuthConstants
- */
 // ================================================================
 // AUTHENTICATION SECTIONS
 // ================================================================
@@ -12,7 +7,6 @@
  * @property JWT - JSON Web Token authentication strategy.
  * @property API_KEY - API Key authentication strategy.
  * @property NONE - No authentication strategy.
- *
  */
 export const AUTH_STRATEGIES = {
   JWT: 'JWT',
@@ -29,7 +23,6 @@ export type AuthStrategy = (typeof AUTH_STRATEGIES)[keyof typeof AUTH_STRATEGIES
  *
  * @property AND - All strategies must succeed.
  * @property OR - At least one strategy must succeed.
- *
  */
 export const GUARD_CONDITIONS = {
   AND: 'AND',
@@ -46,7 +39,6 @@ export type GuardCondition = (typeof GUARD_CONDITIONS)[keyof typeof GUARD_CONDIT
  * @property authStrategies - Array of authentication strategies to be applied.
  * @property options - Additional options for authentication.
  * @property options.condition - Condition to combine multiple strategies (AND/OR).
- *
  */
 export type AuthMetadata = {
   authStrategies: AuthStrategy[]
@@ -60,9 +52,8 @@ export type AuthMetadata = {
  * Role names used for authorization & types in role table/model.
  *
  * @property ADMIN - Administrator role with full access.
- * @property CLIENT role.
- * @property SELLER role.
- *
+ * @property CLIENT - Client role with limited access.
+ * @property SELLER - Seller role with product management access.
  */
 export const ROLE_NAMES = {
   ADMIN: 'ADMIN',

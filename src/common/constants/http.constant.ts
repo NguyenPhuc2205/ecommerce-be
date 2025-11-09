@@ -1,8 +1,3 @@
-/**
- * HTTP related constants, types.
- *
- * @module HttpConstants
- */
 // ================================================================
 // CUSTOM REQUEST CONTEXT KEYS
 // ================================================================
@@ -19,7 +14,6 @@
  *
  * - Store trace ID in request context
  * request[REQUEST_CONTEXT.TRACE_ID] = traceId
- *
  */
 export const REQUEST_CONTEXTS = {
   /** Current authenticated user store */
@@ -54,7 +48,9 @@ export const CUSTOM_HEADERS = {
   API_KEY: 'x-api-key',
 } as const
 
-export type CustomHeaderKey = (typeof CUSTOM_HEADERS)[keyof typeof CUSTOM_HEADERS]
+export type CustomHeaderKey = keyof typeof CUSTOM_HEADERS
+
+export type CustomHeader = (typeof CUSTOM_HEADERS)[keyof typeof CUSTOM_HEADERS]
 
 // ================================================================
 // HTTP METHODS
@@ -71,7 +67,6 @@ export type CustomHeaderKey = (typeof CUSTOM_HEADERS)[keyof typeof CUSTOM_HEADER
  * @property HEAD - HTTP HEAD method.
  * @property TRACE - HTTP TRACE method.
  * @property CONNECT - HTTP CONNECT method.
- *
  */
 export const HTTP_METHODS = {
   GET: 'GET',
@@ -84,5 +79,7 @@ export const HTTP_METHODS = {
   TRACE: 'TRACE',
   CONNECT: 'CONNECT',
 } as const
+
+export type HttpMethodKey = keyof typeof HTTP_METHODS
 
 export type HttpMethod = (typeof HTTP_METHODS)[keyof typeof HTTP_METHODS]
