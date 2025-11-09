@@ -10,23 +10,7 @@ import { IPaginationMetadata } from '@/common/interfaces'
  * @param totalItems - The total number of items across all pages.
  * @returns The calculated pagination metadata.
  */
-export const calculatePaginationMetadata = (
-  page: number,
-  limit: number,
-  totalItems: number,
-  isUnlimited?: boolean,
-): IPaginationMetadata => {
-  if (isUnlimited) {
-    return {
-      page: PAGINATION_DEFAULTS.PAGE,
-      limit: totalItems,
-      totalItems,
-      totalPages: PAGINATION_DEFAULTS.TOTAL_PAGES,
-      hasNextPage: false,
-      hasPreviousPage: false,
-    }
-  }
-
+export const calculatePaginationMetadata = (page: number, limit: number, totalItems: number): IPaginationMetadata => {
   const totalPages = Math.ceil(totalItems / limit) || PAGINATION_DEFAULTS.TOTAL_PAGES
 
   return {
@@ -57,15 +41,16 @@ export const calculateSkip = (page: number, limit: number): number => {
 
 /**
  * Extract pagination parameters and remaining filters from a query object.
+ * A part use to calculate pagination, the rest are filters for data retrieval (in query builder).
  *
  * @param query - The full query object containing pagination params and filters.
  * @returns An object with separated pagination params and filters.
  */
 export const extractPaginationParams = <T>(query: PaginationRequest & T) => {
-  const { page, limit, sortBy, sortOrder, search, isUnlimited, ...remainingFilters } = query
+  const { page, limit, sortBy, sortOrder, search, ...remainingFilters } = query
 
   return {
-    pagination: { page, limit, sortBy, sortOrder, search, isUnlimited },
+    pagination: { page, limit, sortBy, sortOrder, search },
     filters: remainingFilters as T,
   }
 }

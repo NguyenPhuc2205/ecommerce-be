@@ -48,14 +48,10 @@ export const BasePaginationRequestSchema = z
         ...data,
         page: PAGINATION_DEFAULTS.PAGE,
         limit: PAGINATION_DEFAULTS.MAX_UNLIMITED_ITEMS,
-        isUnlimited: true,
       }
     }
 
-    return {
-      ...data,
-      isUnlimited: false,
-    }
+    return data
   })
 
 /**
