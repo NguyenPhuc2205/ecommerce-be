@@ -16,9 +16,7 @@ export class XApiKeyGuard implements CanActivate {
     const request: Request = http.getRequest()
 
     // Get API key from request headers
-    const xApiKey =
-      request.headers[CUSTOM_HEADERS.API_KEY.toLowerCase()] ||
-      request.headers[CUSTOM_HEADERS.API_KEY.toLocaleUpperCase()]
+    const xApiKey = request.headers[CUSTOM_HEADERS.API_KEY]
 
     // If no API key is provided, throw an Unauthorized exception
     if (!xApiKey) {

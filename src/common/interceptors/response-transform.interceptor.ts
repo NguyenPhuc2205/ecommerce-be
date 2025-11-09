@@ -2,9 +2,9 @@ import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nes
 import { HttpArgumentsHost } from '@nestjs/common/interfaces'
 import { Request } from 'express'
 import { map, Observable } from 'rxjs'
-import { ApiResponseBuilder } from '@/common/helpers'
 import { IApiResponse } from '@/common/interfaces'
-import { CUSTOM_HEADER_KEY, TRACE_ID_KEY } from '@/common/constants'
+import { ApiResponseBuilder } from '@/common/builders'
+import { CUSTOM_HEADERS, REQUEST_CONTEXTS } from '@/common/constants'
 
 /**
  * Global Response Transform Interceptor.
@@ -82,9 +82,9 @@ export class ResponseTransformInterceptor<T> implements NestInterceptor<T, IApiR
    */
   private extractTraceId(request: Request): string | undefined {
     const traceId =
-      request.headers[CUSTOM_HEADER_KEY.TRACE_ID] ||
-      request.headers[CUSTOM_HEADER_KEY.REQUEST_ID] ||
-      request[TRACE_ID_KEY]
+      request.headers[CUSTOM_HEADERS.TRACE_ID] ||
+      request.headers[CUSTOM_HEADERS.REQUEST_ID] ||
+      request[REQUEST_CONTEXTS.TRACE_ID]
 
     if (typeof traceId === 'string' && traceId.trim().length > 0) {
       return traceId.trim()
