@@ -1,6 +1,6 @@
 import z from 'zod'
 import { createZodDto } from 'nestjs-zod'
-import { PAGINATION_DEFAULTS, SORT_ORDER } from 'src/common/constants'
+import { PAGINATION_DEFAULTS, SORT_ORDER } from '@/common/constants'
 
 /**
  * Pagination Request Schema.

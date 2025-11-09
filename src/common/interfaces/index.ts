@@ -1,8 +1,8 @@
-export * from './api-response.interface'
+export * from './api.interface'
+
+export * from './email.interface'
 
 export type { IJwtPayload } from './jwt-payload.interface'
-
-export * from './pagination.interface'
 
 export * from './prisma.interface'
 
@@ -17,7 +17,7 @@ export type {
   IUserImages,
   IAvatarOption,
   ICoverOption,
-} from './user-image.interface'
+} from './user.interface'
 
 export type { ITokenPair } from './token.interface'
 
