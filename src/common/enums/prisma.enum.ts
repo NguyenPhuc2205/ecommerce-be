@@ -3,13 +3,15 @@
 // ================================================================
 /**
  * Prisma Error Codes.
+ * - Prisma uses specific error codes to indicate various types of errors, namespaced by their categories.
+ * - This enum provides a comprehensive list of these error codes for easier reference and handling in the application.
  *
- * Complete list: https://www.prisma.io/docs/reference/api-reference/error-reference
+ * @references Complete list: https://www.prisma.io/docs/reference/api-reference/error-reference
  */
 export enum PrismaErrorCode {
-  // ============================================================
+  // ==============================================================
   // COMMON ERRORS (P1xxx)
-  // ============================================================
+  // ==============================================================
   /** Authentication failed against database server */
   AUTHENTICATION_FAILED = 'P1000',
 
@@ -52,9 +54,9 @@ export enum PrismaErrorCode {
   /** Server closed connection */
   CONNECTION_CLOSED = 'P1017',
 
-  // ============================================================
+  // ==============================================================
   // PRISMA CLIENT ERRORS (P2xxx)
-  // ============================================================
+  // ==============================================================
   /** Value too long for column type */
   VALUE_TOO_LONG = 'P2000',
 
@@ -166,9 +168,9 @@ export enum PrismaErrorCode {
   /** Too many database connections */
   TOO_MANY_CONNECTIONS = 'P2037',
 
-  // ============================================================
+  // ==============================================================
   // PRISMA MIGRATE ERRORS (P3xxx)
-  // ============================================================
+  // ==============================================================
   /** Failed to create database */
   MIGRATE_DATABASE_CREATE_FAILED = 'P3000',
 
@@ -244,9 +246,9 @@ export enum PrismaErrorCode {
   /** Simple identifiers required */
   MIGRATE_SIMPLE_IDENTIFIERS_REQUIRED = 'P3024',
 
-  // ============================================================
+  // ==============================================================
   // PRISMA DB PULL ERRORS (P4xxx)
-  // ============================================================
+  // ==============================================================
   /** Introspection failed */
   INTROSPECTION_FAILED = 'P4000',
 
@@ -256,9 +258,9 @@ export enum PrismaErrorCode {
   /** Introspected schema inconsistent */
   INTROSPECTION_SCHEMA_INCONSISTENT = 'P4002',
 
-  // ============================================================
+  // ==============================================================
   // PRISMA ACCELERATE ERRORS (P5xxx, P6xxx)
-  // ============================================================
+  // ==============================================================
   /** Too many requests */
   TOO_MANY_REQUESTS = 'P5011',
 
