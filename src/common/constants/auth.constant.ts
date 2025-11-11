@@ -4,9 +4,9 @@
 /**
  * Authentication strategies.
  *
- * @property JWT - JSON Web Token authentication strategy.
- * @property API_KEY - API Key authentication strategy.
- * @property NONE - No authentication strategy.
+ * @property {string} JWT - JSON Web Token authentication strategy for stateless authentication
+ * @property {string} API_KEY - API Key authentication strategy for service-to-service communication
+ * @property {string} NONE - No authentication required (public endpoints)
  */
 export const AUTH_STRATEGIES = {
   JWT: 'JWT',
@@ -20,9 +20,10 @@ export type AuthStrategy = (typeof AUTH_STRATEGIES)[keyof typeof AUTH_STRATEGIES
 
 /**
  * Guard conditions for combining multiple authentication strategies.
+ * Determines how multiple authentication strategies should be evaluated when applied to an endpoint.
  *
- * @property AND - All strategies must succeed.
- * @property OR - At least one strategy must succeed.
+ * @property {string} AND - All specified authentication strategies must succeed
+ * @property {string} OR - At least one of the specified authentication strategies must succeed
  */
 export const GUARD_CONDITIONS = {
   AND: 'AND',
@@ -36,9 +37,9 @@ export type GuardCondition = (typeof GUARD_CONDITIONS)[keyof typeof GUARD_CONDIT
 /**
  * Authentication metadata structure type.
  *
- * @property authStrategies - Array of authentication strategies to be applied.
- * @property options - Additional options for authentication.
- * @property options.condition - Condition to combine multiple strategies (AND/OR).
+ * @property {AuthStrategy[]} authStrategies - Array of authentication strategies to apply
+ * @property {Object} options - Configuration options for authentication
+ * @property {GuardCondition} options.condition - Condition for combining multiple strategies (AND/OR)
  */
 export type AuthMetadata = {
   authStrategies: AuthStrategy[]
@@ -49,15 +50,23 @@ export type AuthMetadata = {
 // AUTHORIZATION SECTIONS
 // ================================================================
 /**
- * Role names used for authorization & types in role table/model.
+ * Predefined role names used throughout the application.
+ * Defines the standard user roles for role-based access control (RBAC).
+ * These roles should match the roles defined in the database schema
+ * and are used for authorization checks.
  *
- * @property ADMIN - Administrator role with full access.
- * @property CLIENT - Client role with limited access.
- * @property SELLER - Seller role with product management access.
+ * @property {string} ADMIN - Administrator role with full system access and management capabilities
+ * @property {string} CLIENT - Client/Customer role with standard user access to purchase and browse
+ * @property {string} SELLER - Seller/Vendor role with product management and store administration access
  */
 export const ROLE_NAMES = {
+  /** Administrator role with full access. */
   ADMIN: 'ADMIN',
+
+  /** Client role with limited access. */
   CLIENT: 'CLIENT',
+
+  /** Seller role with product management access. */
   SELLER: 'SELLER',
 } as const
 

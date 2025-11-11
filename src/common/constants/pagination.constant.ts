@@ -1,15 +1,19 @@
 /**
- * Pagination default values and types.
+ * Pagination default values and configuration constants.
  *
- * @property MIN_PAGE - Minimum page number.
- * @property PAGE - Default page number.
- * @property LIMIT - Default items per page limit.
- * @property MIN_LIMIT - Minimum items per page limit.
- * @property MAX_LIMIT - Maximum items per page limit.
- * @property TOTAL_PAGES - Default total pages.
- * @property TOTAL_ITEMS - Default total items.
- * @property UNLIMITED - Special value indicating no limit.
- * @property MAX_UNLIMITED_ITEMS - Maximum items allowed when using UNLIMITED.
+ * Provides standardized pagination settings used throughout the application
+ * to ensure consistent behavior for paginated API responses. Includes limits
+ * for safety and performance optimization.
+ *
+ * @property {number} MIN_PAGE - Minimum valid page number (1-based indexing)
+ * @property {number} PAGE - Default page number when not specified
+ * @property {number} LIMIT - Default number of items per page
+ * @property {number} MIN_LIMIT - Minimum allowed items per page
+ * @property {number} MAX_LIMIT - Maximum allowed items per page (prevents excessive data transfer)
+ * @property {number} TOTAL_PAGES - Default total pages value
+ * @property {number} TOTAL_ITEMS - Default total items value
+ * @property {number} UNLIMITED - Special value indicating "fetch all items" without pagination
+ * @property {number} MAX_UNLIMITED_ITEMS - Safety limit for unlimited fetches (prevents memory issues)
  */
 export const PAGINATION_DEFAULTS = {
   MIN_PAGE: 1,
@@ -32,10 +36,13 @@ export type PaginationDefaultKey = keyof typeof PAGINATION_DEFAULTS
 export type PaginationDefault = (typeof PAGINATION_DEFAULTS)[keyof typeof PAGINATION_DEFAULTS] // [...]: all valid index of PAGINATION_DEFAULTS & create union type
 
 /**
- * Sorting directions.
+ * Sorting directions for ordering query results.
  *
- * @property ASC - Ascending order.
- * @property DESC - Descending order.
+ * Defines the standard sort order options for database queries
+ * and API responses. Used in pagination and filtering operations.
+ *
+ * @property {string} ASC - Ascending order (A-Z, 0-9, oldest to newest)
+ * @property {string} DESC - Descending order (Z-A, 9-0, newest to oldest)
  */
 export const SORT_ORDER = ['ASC', 'DESC'] as const
 

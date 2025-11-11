@@ -1,6 +1,9 @@
-// ============================================
-// REGEX CONSTANTS
-// ============================================
+// ================================================================
+// REGEX PATTERNS
+// ================================================================
+/**
+ * A collection of regular expression patterns for validating various data formats.
+ */
 export const REGEX_PATTERNS = {
   /**
    * Common validation patterns used across the application

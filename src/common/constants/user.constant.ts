@@ -3,11 +3,14 @@
 // ================================================================
 /**
  * Possible statuses for a user account.
- * Re-define from prisma schema to avoid direct dependency.
  *
- * @property ACTIVE - The user account is active and in good standing.
- * @property INACTIVE - The user account is inactive and may not access certain features.
- * @property BLOCKED - The user account is blocked due to violations or issues.
+ * Defines the lifecycle states of user accounts within the application.
+ * Re-defined from Prisma schema to avoid direct dependency on generated types
+ * and provide better type safety across the application.
+ *
+ * @property {string} ACTIVE - The user account is active and fully functional with all features accessible
+ * @property {string} INACTIVE - The user account is temporarily inactive (e.g., user deactivated their account)
+ * @property {string} BLOCKED - The user account is permanently blocked due to policy violations or security concerns
  */
 export const USER_STATUS = {
   ACTIVE: 'ACTIVE',
@@ -23,10 +26,13 @@ export type UserStatus = (typeof USER_STATUS)[keyof typeof USER_STATUS]
 // USER MEDIA
 // ================================================================
 /**
- * Types of user images.
+ * Types of user profile images supported by the application.
  *
- * @property AVATAR - User avatar image.
- * @property COVER - User cover image.
+ * Defines the different image categories that can be associated
+ * with user profiles for visual personalization.
+ *
+ * @property {string} AVATAR - User profile picture/avatar (typically square, displayed in listings and comments)
+ * @property {string} COVER - User profile cover/banner image (typically wide, displayed on profile pages)
  */
 export const USER_IMAGES = {
   AVATAR: 'avatar',
@@ -38,14 +44,22 @@ export type UserImageKey = keyof typeof USER_IMAGES
 export type UserImage = (typeof USER_IMAGES)[keyof typeof USER_IMAGES]
 
 /**
- * Sources for generating user images.
+ * External services and methods for generating user profile images.
  *
- * @property DICEBEAR - Dicebear avatar generation service.
- * @property UI_AVATAR - UI Avatar generation service.
- * @property ROBOHASH - Robohash image generation service.
- * @property PICSUM - Picsum photo service.
- * @property UNSPLASH - Unsplash photo service.
- * @property GRADIENT - Gradient image generation service.
+ * Provides multiple options for automatic image generation and selection
+ * when users don't upload their own profile images. Each source offers
+ * different styles and capabilities.
+ *
+ * @property {string} DICEBEAR - DiceBear avatar generation service (customizable SVG avatars)
+ * @property {string} UI_AVATAR - UI Avatars service (text-based initial avatars)
+ * @property {string} ROBOHASH - RoboHash service (unique robot/monster avatars based on identifier)
+ * @property {string} PICSUM - Lorem Picsum service (random stock photos)
+ * @property {string} UNSPLASH - Unsplash photo service (high-quality random photos)
+ * @property {string} GRADIENT - Custom gradient image generation (colorful abstract backgrounds)
+ *
+ * @see {@link https://dicebear.com | DiceBear Documentation}
+ * @see {@link https://ui-avatars.com | UI Avatars Documentation}
+ * @see {@link https://robohash.org | RoboHash Documentation}
  */
 export const IMAGE_SOURCES = {
   DICEBEAR: 'dicebear',

@@ -6,6 +6,8 @@ export * from './http.constant'
 
 export * from './pagination.constant'
 
+export * from './prisma.constant'
+
 export * from './regex.constant'
 
 export * from './token.constant'

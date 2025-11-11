@@ -1,6 +1,18 @@
 /**
- * A collection of trending color hex codes.
- * These colors are selected based on current design trendss and popular palettes.
+ * A curated collection of trending color hex codes for modern UI design.
+ * This palette includes 70 carefully selected colors organized into thematic groups
+ * to provide designers and developers with ready-to-use color options that align
+ * with current design trends. Each group represents a specific mood or aesthetic.
+ *
+ * Color Groups
+ * - Warm & Cozy (indices 0-9): Peachy, coral, and tan tones
+ * - Cool & Fresh (indices 10-19): Aqua, teal, and ocean blues
+ * - Nature & Earth (indices 20-29): Forest greens and earth tones
+ * - Vibrant & Bold (indices 30-39): Hot pinks, purples, and reds
+ * - Sunset & Golden (indices 40-49): Yellows, golds, and warm neutrals
+ * - Professional & Modern (indices 50-59): Navy, gray, and neutral tones
+ *
+ * @type {ReadonlyArray<string>}
  */
 export const TRENDING_COLORS = [
   // Warm & Cozy
@@ -77,8 +89,19 @@ export const TRENDING_COLORS = [
 ] as const
 
 /**
- * A collection of gradient color combinations.
- * Each combination consists of two hex color codes that blend well together.
+ * A collection of pre-designed gradient color combinations.
+ * Contains 15 professionally curated two-color gradient combinations
+ * that work harmoniously together. Each combination is represented as
+ * a tuple of two hex color codes [startColor, endColor].
+ *
+ * These gradients are optimized for:
+ * - Background designs
+ * - Button effects
+ * - Header banners
+ * - Card overlays
+ * - Loading animations
+ *
+ * @type {ReadonlyArray<readonly [string, string]>}
  */
 export const GRADIENT_COMBOS = [
   ['#667eea', '#764ba2'],
@@ -99,8 +122,13 @@ export const GRADIENT_COMBOS = [
 ] as const
 
 /**
- * Predefined themes for generating cover images.
- * These themes can be used with image generation services to create visually appealing covers.
+ * Predefined thematic keywords for generating cover images.
+ * Each theme consists of comma-separated keywords that can be used
+ * with image generation APIs (like Unsplash, Pexels) to fetch or
+ * generate contextually appropriate cover images. Themes are designed
+ * to cover various aesthetics and use cases.
+ *
+ * @type {ReadonlyArray<string>}
  */
 export const COVER_THEMES = [
   'abstract,minimal',
@@ -124,8 +152,21 @@ export const COVER_THEMES = [
 ] as const
 
 /**
- * Available avatar styles for generating user avatars.
- * These styles can be used with avatar generation services to create unique user profile images.
+ * Available avatar styles for programmatic avatar generation.
+ * Compatible with DiceBear API and similar avatar generation services.
+ * Each style produces a distinct visual aesthetic ranging from realistic
+ * human avatars to abstract geometric patterns.
+ *
+ * **Style Categories:**
+ * - Human-like: avataaars, big-ears, lorelei, micah, personas
+ * - Cartoon/Fun: big-smile, croodles, fun-emoji, open-peeps
+ * - Abstract: bottts, identicon, pixel-art, rings, shapes
+ * - Adventure: adventurer, adventurer-neutral, thumbs
+ * - Minimalist: initials, miniavs
+ *
+ * @type {ReadonlyArray<string>}
+ *
+ * @see {@link https://dicebear.com/styles | DiceBear Styles Documentation}
  */
 export const AVATAR_STYLES = [
   'avataaars',
