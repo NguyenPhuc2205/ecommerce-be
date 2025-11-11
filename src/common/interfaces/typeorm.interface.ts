@@ -18,7 +18,7 @@ export interface ITypeORMError {
  * Interface representing driver-specific error details in TypeORM.
  *
  * @property {string} [code] - The error code, if available.
- * @property {number} [errno] - The error number, if available.
+ * @property {number} [error] - The error number, if available.
  * @property {Record<string, unknown>} [key: string] - Additional driver-specific error properties.
  */
 export interface ITypeORMDriverError {

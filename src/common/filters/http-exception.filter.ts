@@ -1,10 +1,10 @@
-import { CUSTOM_HEADER_KEY, TRACE_ID_KEY } from '@/common/constants'
-import { ApiResponseBuilder } from '@/common/helpers'
+import { Request, Response } from 'express'
+import { ApiResponseBuilder } from '@/common/builders'
 import { IApiResponse, IErrorDetail, IFormattedZodError } from '@/common/interfaces'
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common'
 import { HttpArgumentsHost } from '@nestjs/common/interfaces'
 import { HttpAdapterHost } from '@nestjs/core'
-import { Request, Response } from 'express'
+import { CUSTOM_HEADERS, REQUEST_CONTEXTS } from '@/common/constants'
 
 /**
  * Global HTTP Exception Filter
@@ -62,9 +62,9 @@ export class HttpExceptionFilter implements ExceptionFilter {
    */
   private extractTraceId(request: Request): string | undefined {
     const traceId =
-      request.headers[CUSTOM_HEADER_KEY.TRACE_ID] ||
-      request.headers[CUSTOM_HEADER_KEY.REQUEST_ID] ||
-      request[TRACE_ID_KEY]
+      request.headers[CUSTOM_HEADERS.TRACE_ID] ||
+      request.headers[CUSTOM_HEADERS.REQUEST_ID] ||
+      request[REQUEST_CONTEXTS.TRACE_ID]
 
     if (typeof traceId === 'string' && traceId.trim().length > 0) {
       return traceId.trim()
@@ -117,7 +117,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     }
 
     // Fallback to default message for status code
-    return this.getDefaultMessageForStatus(statusCode)
+    return HttpStatus[statusCode].toString() || 'Unknown Error'
   }
 
   /**
@@ -186,36 +186,5 @@ export class HttpExceptionFilter implements ExceptionFilter {
         } as IFormattedZodError
       })
       .filter((error): error is IFormattedZodError => error !== null) // Filter out nulls
-  }
-
-  /**
-   * Get default message for common HTTP status codes.
-   * @param statusCode HTTP status code
-   * @returns Default error message string
-   */
-  private getDefaultMessageForStatus(statusCode: number): string {
-    const statusMessages: Record<number, string> = {
-      [HttpStatus.BAD_REQUEST]: 'Bad request',
-      [HttpStatus.UNAUTHORIZED]: 'Unauthorized',
-      [HttpStatus.PAYMENT_REQUIRED]: 'Payment required',
-      [HttpStatus.FORBIDDEN]: 'Forbidden',
-      [HttpStatus.NOT_FOUND]: 'Resource not found',
-      [HttpStatus.METHOD_NOT_ALLOWED]: 'Method not allowed',
-      [HttpStatus.NOT_ACCEPTABLE]: 'Not acceptable',
-      [HttpStatus.REQUEST_TIMEOUT]: 'Request timeout',
-      [HttpStatus.CONFLICT]: 'Conflict',
-      [HttpStatus.GONE]: 'Gone',
-      [HttpStatus.PAYLOAD_TOO_LARGE]: 'Payload too large',
-      [HttpStatus.UNSUPPORTED_MEDIA_TYPE]: 'Unsupported media type',
-      [HttpStatus.UNPROCESSABLE_ENTITY]: 'Unprocessable entity',
-      [HttpStatus.TOO_MANY_REQUESTS]: 'Too many requests',
-      [HttpStatus.INTERNAL_SERVER_ERROR]: 'Internal server error',
-      [HttpStatus.NOT_IMPLEMENTED]: 'Not implemented',
-      [HttpStatus.BAD_GATEWAY]: 'Bad gateway',
-      [HttpStatus.SERVICE_UNAVAILABLE]: 'Service unavailable',
-      [HttpStatus.GATEWAY_TIMEOUT]: 'Gateway timeout',
-    }
-
-    return statusMessages[statusCode] || 'An error occurred'
   }
 }
