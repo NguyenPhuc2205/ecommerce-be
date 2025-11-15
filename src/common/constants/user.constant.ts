@@ -56,10 +56,14 @@ export type UserImage = (typeof USER_IMAGES)[keyof typeof USER_IMAGES]
  * @property {string} PICSUM - Lorem Picsum service (random stock photos)
  * @property {string} UNSPLASH - Unsplash photo service (high-quality random photos)
  * @property {string} GRADIENT - Custom gradient image generation (colorful abstract backgrounds)
+ * @property {string} PLACEHOLDER - Placeholder image service (simple placeholder graphics)
  *
  * @see {@link https://dicebear.com | DiceBear Documentation}
  * @see {@link https://ui-avatars.com | UI Avatars Documentation}
  * @see {@link https://robohash.org | RoboHash Documentation}
+ * @see {@link https://picsum.photos | Lorem Picsum Documentation}
+ * @see {@link https://unsplash.com | Unsplash Documentation}
+ * @see {@link https://via.placeholder.com | Placeholder.com Documentation}
  */
 export const IMAGE_SOURCES = {
   DICEBEAR: 'dicebear',
@@ -68,6 +72,7 @@ export const IMAGE_SOURCES = {
   PICSUM: 'picsum',
   UNSPLASH: 'unsplash',
   GRADIENT: 'gradient',
+  PLACEHOLDER: 'placeholder',
 } as const
 
 export type ImageSourceKey = keyof typeof IMAGE_SOURCES

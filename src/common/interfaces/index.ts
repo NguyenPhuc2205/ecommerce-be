@@ -4,6 +4,8 @@ export * from './email.interface'
 
 export * from './jwt-payload.interface'
 
+export * from './media.interface'
+
 export * from './prisma.interface'
 
 export * from './zod.interface'
