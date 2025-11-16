@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common'
 import { VerificationCodesController } from './verification-codes.controller'
-import { VerificationCodesService } from './verification-codes.service'
-import { VerificationCodesRepository } from 'src/modules/verification-codes/verification-codes.repository'
+import { VerificationCodesService } from './services/verification-codes.service'
+import { VerificationCodesRepository } from '@/modules/verification-codes/repositories/verification-codes.repository'
+import { OtpService } from '@/modules/verification-codes/services'
 
 @Module({
   controllers: [VerificationCodesController],
-  providers: [VerificationCodesService, VerificationCodesRepository],
-  exports: [VerificationCodesService],
+  providers: [OtpService, VerificationCodesService, VerificationCodesRepository],
+  exports: [OtpService, VerificationCodesService],
 })
 export class VerificationCodesModule {}
