@@ -1,5 +1,5 @@
 import { OTPDeliveryMethod } from '@prisma/client'
-import { OTP_DELIVERY_METHODS, VERIFICATION_CODE_TYPES } from 'src/common/constants'
+import { OTP_DELIVERY_METHODS, VERIFICATION_CODE_TYPES } from '@/common/constants'
 import z from 'zod'
 
 export const BaseVerificationCodeSchema = z.object({

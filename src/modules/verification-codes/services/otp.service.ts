@@ -1,26 +1,39 @@
 import { OTP_CONFIGS, VerificationCodeType } from '@/common/constants'
 import { IOTPConfig, IOTPResult, IVerifyOTPResult } from '@/common/interfaces'
-import { HashingService } from '@/shared/security/hashing.service'
+import { EnvConfig } from '@/configuration/env.schema'
+import { HashingService } from '@/shared/security/hashing/hashing.service'
 import { Injectable } from '@nestjs/common'
+import { ConfigService } from '@nestjs/config'
 import { randomInt } from 'crypto'
 
 @Injectable()
 export class OtpService {
-  constructor(private readonly hashingService: HashingService) {}
+  private readonly testingMode: boolean
+  private readonly testingCode: string
+
+  constructor(
+    private readonly hashingService: HashingService,
+    private readonly configService: ConfigService<EnvConfig>,
+  ) {
+    this.testingMode = this.configService.get('RESEND_ENABLED_TESTING_MODE', { infer: true }) as boolean
+    this.testingCode = this.configService.get('RESEND_TESTING_CODE', { infer: true }) as string
+  }
 
   // ================================================================
   // MAIN METHODS
   // ================================================================
   /**
    * Generates a secure OTP (One-Time Password).
+   *
    * @param type - The type of OTP to generate.
    * @param customConfig - Optional custom configuration for the OTP.
    * @returns The generated OTP and its hashed version.
    */
   public async generateOTPWithExpiry(type: VerificationCodeType, customConfig?: IOTPConfig): Promise<IOTPResult> {
     const config = customConfig || this.getOTPConfig(type)
-    const code = this.generateSecureOTP(config.length, config.includeLetters)
+    const code = this.testingMode ? this.testingCode : this.generateSecureOTP(config.length, config.includeLetters)
     const hashedCode = await this.hashingService.hash(code)
+
     return {
       code,
       hashedCode,
@@ -79,8 +92,8 @@ export class OtpService {
     const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
     const characters = includeLetters ? digits + letters : digits
 
+    // Generate OTP
     let otp: string = ''
-
     for (let i = 0; i < length; ++i) {
       const randomIndex = randomInt(0, characters.length)
       otp += characters[randomIndex]
@@ -94,5 +107,21 @@ export class OtpService {
     }
 
     return otp
+  }
+
+  /**
+   * Masks the identifier (email or phone number) for privacy.
+   *
+   * @param identifier - The identifier to mask.
+   * @returns The masked identifier.
+   */
+  public maskIdentifier(identifier: string): string {
+    if (identifier.includes('@')) {
+      const [local, domain] = identifier.split('@')
+      if (local.length <= 2) return identifier
+      return local[0] + '*'.repeat(local.length - 2) + local[local.length - 1] + '@' + domain
+    }
+
+    return identifier[0] + '*'.repeat(identifier.length - 4) + identifier.slice(-3)
   }
 }

@@ -1,5 +1,7 @@
-import { BaseVerificationCodeSchema } from 'src/modules/verification-codes/schemas/base-verification-code.schema'
 import z from 'zod'
+import { BaseVerificationCodeSchema } from '@/modules/verification-codes/dtos/base-verification-code.schema'
+import { REGEX_PATTERNS } from '@/common/constants'
+import { createZodDto } from 'nestjs-zod'
 
 export const SendCodeSchema = BaseVerificationCodeSchema.pick({
   identifier: true,
@@ -19,13 +21,12 @@ export const SendCodeSchema = BaseVerificationCodeSchema.pick({
             return z.email().safeParse(val).success
           }
 
-          return z
-            .string()
-            .regex(/^\+?[1-9]\d{1,14}$/)
-            .safeParse(val).success
+          return z.string().regex(REGEX_PATTERNS.COMMON.PHONE).safeParse(val).success
         },
         { message: 'Identifier must be a valid email or phone number' },
       ),
   })
 
 export type SendCode = z.infer<typeof SendCodeSchema>
+
+export class SendCodeDto extends createZodDto(SendCodeSchema) {}
