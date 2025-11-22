@@ -7,9 +7,12 @@
 // Scalar Types: https://pris.ly/d/prisma-schema#scalar-types (Effect on migrations)
 // Relation/Non-Scalar Fields: https://pris.ly/d/prisma-schema#relation-fields
 
+// Update reference: https://www.prisma.io/docs/getting-started/prisma-orm/add-to-existing-project/postgresql
+// Update to prisma 7.x and modify configuration
+
 generator client {
-  provider = "prisma-client-js"
-  output = "../node_modules/.prisma/client"
+  provider = "prisma-client"
+  output = "../generated/prisma"  // Directory path: root/generated/prisma
 }
 
 generator json {
@@ -18,7 +21,6 @@ generator json {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model Language {
@@ -187,7 +189,6 @@ model VerificationCode {
   maxAttempts Int                  @default(5)  // Max times allowed to try
   isUsed      Boolean              @default(false)  // Mark if the code has been used or is disabled
   resendCount Int                  @default(0)
-  
   deliveryMethod OTPDeliveryMethod @default(EMAIL)  // How the code was sent
 
   userId      Int?

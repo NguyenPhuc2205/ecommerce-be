@@ -15,7 +15,8 @@ export default tseslint.config(
       'dist/',
       'node_modules/',
       'coverage/',
-      '.husky/'
+      '.husky/',
+      '.vscode/',
     ],
   },
 
@@ -30,7 +31,7 @@ export default tseslint.config(
   // MAIN PROJECT (src/, test/, emails/)
   // ========================================
   {
-    files: ['src/**/*.ts', 'test/**/*.ts', 'emails/**/*.ts'],
+    files: ['src/**/*.ts', 'test/**/*.ts', 'emails/**/*.ts', 'prisma.config.ts'],
     languageOptions: {
       globals: {
         ...globals.node,
@@ -59,7 +60,7 @@ export default tseslint.config(
   // SCRIPTS FOLDER (scripts/**/*.ts)
   // ========================================
   {
-    files: ['scripts/**/*.ts', 'scripts/**/*.script.ts'],
+    files: ['scripts/**/*.ts', 'scripts/**/*.script.ts', 'prisma/**/*.ts'],
     languageOptions: {
       globals: {
         ...globals.node,
